@@ -8,13 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.apollographql.apollo3.exception.ApolloException
 import com.example.rocketreserver.apolloClient
 import com.wang.kahn.knn3demo.databinding.FragmentFirstBinding
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class NFTListFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
 
@@ -35,12 +37,20 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
         lifecycleScope.launchWhenResumed {
-            val response = apolloClient(requireContext()).query(NFTQuery()).execute()
-            Log.i("wangkang","success response: ${response.data}")
+            val response = try {
+                apolloClient(requireContext()).query(NFTQuery()).execute()
+            } catch (e: ApolloException) {
+                Log.e("NFTList", "request fail", e)
+                null
+            }
+            response?.data?.addrs?.get(0)?.holdnfts?.let {
+                if (!response.hasErrors()) {
+                    binding.nftList.layoutManager = LinearLayoutManager(requireContext())
+                    binding.nftList.adapter = NFTListAdapter(it)
+                }
+            }
+
         }
     }
 

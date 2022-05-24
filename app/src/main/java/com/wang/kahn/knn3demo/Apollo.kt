@@ -17,7 +17,6 @@ fun apolloClient(context: Context): ApolloClient {
 
     instance = ApolloClient.Builder()
         .serverUrl("https://mw.graphql.knn3.xyz/")
-        .webSocketServerUrl("wss://mw.graphql.knn3.xyz/")
         .okHttpClient(okHttpClient)
         .build()
 
