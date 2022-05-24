@@ -1,5 +1,5 @@
-query NFTQuery{
-  addrs(where: { address: "0xae89ad222e67205e8d947f131fdc9fa139828745" }) {
+query NFTQuery($addressVar: String){
+  addrs(where: { address: $addressVar }) {
     address
     holdnfts {
       contract
