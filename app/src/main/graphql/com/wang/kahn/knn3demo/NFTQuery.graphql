@@ -1,0 +1,10 @@
+query NFTQuery{
+  addrs(where: { address: "0xae89ad222e67205e8d947f131fdc9fa139828745" }) {
+    address
+    holdnfts {
+      contract
+      imageUrl
+      symbol
+    }
+  }
+}
