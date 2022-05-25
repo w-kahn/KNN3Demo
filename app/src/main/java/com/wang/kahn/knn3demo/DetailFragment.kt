@@ -6,14 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.wang.kahn.knn3demo.databinding.FragmentSecondBinding
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.wang.kahn.knn3demo.databinding.FragmentDetailBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class DetailFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentDetailBinding? = null
+    val args: DetailFragmentArgs by navArgs()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,18 +26,15 @@ class DetailFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-        }
+        Glide.with(view.context).load(args.nftUrl).into(binding.nftDetailImage)
+        binding.nftSymbolText.text = args.nftSymbol
     }
 
     override fun onDestroyView() {
