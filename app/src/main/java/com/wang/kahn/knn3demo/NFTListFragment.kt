@@ -15,7 +15,6 @@ import com.apollographql.apollo3.exception.ApolloException
 import com.example.rocketreserver.apolloClient
 import com.wang.kahn.knn3demo.databinding.FragmentListBinding
 
-const val ADDRESS_TO_QUERY = "0xae89ad222e67205e8d947f131fdc9fa139828745"
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */

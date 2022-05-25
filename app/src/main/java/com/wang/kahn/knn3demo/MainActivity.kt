@@ -12,6 +12,10 @@ import android.view.Menu
 import android.view.MenuItem
 import com.wang.kahn.knn3demo.databinding.ActivityMainBinding
 
+const val NUM_PAGES = 5
+
+const val ADDRESS_TO_QUERY = "0xae89ad222e67205e8d947f131fdc9fa139828745"
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration

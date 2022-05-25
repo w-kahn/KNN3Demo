@@ -3,7 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/NFTListFragment">
+    app:startDestination="@id/MainFragment">
+
+    <fragment
+        android:id="@+id/MainFragment"
+        android:name="com.wang.kahn.knn3demo.MainFragment"
+        android:label="@string/main_fragment_label"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/openNftDetail"
+            app:destination="@id/DetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/NFTListFragment"
