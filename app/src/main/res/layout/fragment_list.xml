@@ -10,6 +10,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/nft_list"
+        android:id="@+id/list"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

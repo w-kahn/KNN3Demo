@@ -18,7 +18,9 @@ import com.wang.kahn.knn3demo.databinding.FragmentListBinding
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class NFTListFragment : Fragment() {
+const val TEST_EVENT_ADDRESS_TO_QUERY = "0x896002e29fe4cda28a3ae139b0bf7bac26b33a8c"
+
+class EventListFragment : Fragment() {
 
     private var _binding: FragmentListBinding? = null
 
@@ -41,24 +43,19 @@ class NFTListFragment : Fragment() {
 
         lifecycleScope.launchWhenResumed {
             val response = try {
-                apolloClient(requireContext()).query(NFTQuery(Optional.presentIfNotNull(
-                    ADDRESS_TO_QUERY.lowercase()))).execute()
+                apolloClient(requireContext()).query(POAPEventsQuery(Optional.presentIfNotNull(
+                    TEST_EVENT_ADDRESS_TO_QUERY.lowercase()))).execute()
             } catch (e: ApolloException) {
                 Log.e("NFTList", "request fail", e)
                 null
             }
-            response?.data?.addrs?.get(0)?.holdnfts?.let {
+            response?.data?.addrs?.get(0)?.attendEvents?.let {
                 if (!response.hasErrors()) {
                     binding.list.layoutManager = LinearLayoutManager(requireContext())
-                    val adapter =  NFTListAdapter(it)
+                    val adapter =  EventListAdapter(it)
                     binding.list.adapter = adapter
-                    adapter.onItemClickListener = { nft ->
-                        findNavController().navigate(
-                            NFTListFragmentDirections.openNftDetail(
-                                nft.imageUrl,
-                                nft.symbol
-                            )
-                        )
+                    adapter.onItemClickListener = { follow ->
+                        // TODO: to jump address query
                     }
                 }
             }

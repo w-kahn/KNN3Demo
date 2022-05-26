@@ -51,9 +51,9 @@ class SocialListFragment : Fragment() {
             }
             response?.data?.addrs?.get(0)?.addrsFollow?.let {
                 if (!response.hasErrors()) {
-                    binding.nftList.layoutManager = LinearLayoutManager(requireContext())
+                    binding.list.layoutManager = LinearLayoutManager(requireContext())
                     val adapter =  SocialListAdapter(it)
-                    binding.nftList.adapter = adapter
+                    binding.list.adapter = adapter
                     adapter.onItemClickListener = { follow ->
                         // TODO: to jump address query
                     }

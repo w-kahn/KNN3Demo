@@ -13,7 +13,7 @@ import com.wang.kahn.knn3demo.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
 
-    private val tabs = listOf("NFTs", "Social", "Action", "Status", "Membership")
+    private val tabs = listOf("NFTs", "RSS3 Follows", "POAP Events")
 
     private var _binding: FragmentMainBinding? = null
 
@@ -48,6 +48,7 @@ class MainFragment : Fragment() {
             return when (position) {
                 0 -> NFTListFragment()
                 1 -> SocialListFragment()
+                2 -> EventListFragment()
                 else -> NFTListFragment()
             }
         }

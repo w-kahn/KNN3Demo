@@ -1,0 +1,8 @@
+query POAPEventsQuery($addressVar: String){
+  addrs(where:{address: $addressVar}) {
+    attendEvents {
+      id
+      name
+    }
+  }
+}
