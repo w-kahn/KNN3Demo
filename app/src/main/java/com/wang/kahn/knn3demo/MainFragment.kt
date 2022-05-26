@@ -44,7 +44,13 @@ class MainFragment : Fragment() {
     private inner class PagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         override fun getItemCount(): Int = tabs.size
 
-        override fun createFragment(position: Int): Fragment = NFTListFragment()
+        override fun createFragment(position: Int): Fragment {
+            return when (position) {
+                0 -> NFTListFragment()
+                1 -> SocialListFragment()
+                else -> NFTListFragment()
+            }
+        }
     }
 
 }
