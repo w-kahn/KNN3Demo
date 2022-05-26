@@ -1,13 +1,17 @@
 package com.wang.kahn.knn3demo
 
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wang.kahn.knn3demo.databinding.FragmentMainBinding
 
@@ -35,10 +39,24 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewPager.adapter = PagerAdapter(requireActivity())
-        binding.addressText.text = ADDRESS_TO_QUERY
+        binding.textField.editText?.setOnEditorActionListener(object : TextView.OnEditorActionListener{
+            override fun onEditorAction(p0: TextView?, p1: Int, p2: KeyEvent?): Boolean {
+                if (p1 == EditorInfo.IME_ACTION_SEARCH) {
+                    goSearch()
+                    return true
+                }
+                return false
+            }
+        })
         TabLayoutMediator(binding.tabLayout, viewPager
         ) { tab, position -> tab.text = tabs[position] }.attach()
 
+    }
+
+    private fun goSearch() {
+        Snackbar.make(binding.root, "searching ${binding.textField.editText?.text}",
+            Snackbar.LENGTH_LONG)
+            .setAction("Action", null).show()
     }
 
     private inner class PagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
