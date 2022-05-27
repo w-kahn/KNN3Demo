@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.snackbar.Snackbar
@@ -24,6 +25,11 @@ class MainFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private val addressQuery: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+
 
     private val viewPager: ViewPager2
         get() = binding.pager
@@ -54,9 +60,7 @@ class MainFragment : Fragment() {
     }
 
     private fun goSearch() {
-        Snackbar.make(binding.root, "searching ${binding.textField.editText?.text}",
-            Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show()
+        addressQuery.value = binding.textField.editText?.text?.toString()
     }
 
     private inner class PagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
@@ -64,10 +68,10 @@ class MainFragment : Fragment() {
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> NFTListFragment()
-                1 -> SocialListFragment()
-                2 -> EventListFragment()
-                else -> NFTListFragment()
+                0 -> NFTListFragment(addressQuery)
+                1 -> SocialListFragment(addressQuery)
+                2 -> EventListFragment(addressQuery)
+                else -> NFTListFragment(addressQuery)
             }
         }
     }
