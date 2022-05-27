@@ -45,4 +45,5 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="address_text_field_hint">Input address</string>
+    <string name="no_data_error">Empty Data</string>
 </resources>
