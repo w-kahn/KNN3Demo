@@ -1,16 +1,12 @@
 package com.wang.kahn.knn3demo
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
-import android.view.Menu
-import android.view.MenuItem
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.navigation.NavigationView
 import com.wang.kahn.knn3demo.databinding.ActivityMainBinding
 
 const val NUM_PAGES = 5
@@ -32,13 +28,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawLayout)
+        appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.address_query, R.id.nft_query, R.id.membership_query
+        ), binding.drawLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
-        val navControllerFragment = navHostFragment.navController
-        findViewById<NavigationView>(R.id.nav_view).setupWithNavController(navControllerFragment)
+        binding.navView.setupWithNavController(navController)
 
     }
 
@@ -64,7 +58,22 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+    }
+
+    override fun onBackPressed() {
+        if (binding.drawLayout.isDrawerOpen(binding.navView)) {
+            binding.drawLayout.closeDrawers()
+            return
+        }
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+
+        val currentDestination = navController.currentDestination
+        val topLevelDestinations: Set<Int> = appBarConfiguration.topLevelDestinations
+        if (topLevelDestinations.contains(currentDestination?.id)) {
+            finish()
+            return
+        }
+        super.onBackPressed()
     }
 }

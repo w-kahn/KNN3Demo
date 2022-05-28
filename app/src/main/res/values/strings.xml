@@ -49,4 +49,8 @@
     <string name="nft_query">NFT</string>
     <string name="address_query">Address</string>
     <string name="membership_query">Membership</string>
+    <string name="nft_holders">NFT Holders</string>
+    <string name="membership">Membership</string>
+    <string name="membership_query_hint">Input feature</string>
+    <string name="nft_query_hint">Input NFT symbol</string>
 </resources>

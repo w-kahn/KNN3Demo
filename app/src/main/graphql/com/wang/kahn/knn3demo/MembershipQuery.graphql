@@ -1,0 +1,9 @@
+query MembershipQuery($featureToQuery: String){
+  features(where:{feature: $featureToQuery}) {
+    feature
+    addrsFeature {
+      address
+      if_balance
+    }
+  }
+}

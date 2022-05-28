@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/AddressQueryFragment"
-        android:icon="@drawable/ic_baseline_account_box_24"
-        android:checked="true"
-        android:title="@string/address_query"/>
+    <group android:checkableBehavior="single">
 
-    <item android:id="@+id/nft_query"
-        android:icon="@drawable/ic_baseline_photo_filter_24"
-        android:title="@string/nft_query"/>
+        <item
+            android:id="@+id/address_query"
+            android:icon="@drawable/ic_baseline_account_box_24"
+            android:title="@string/address_query"/>
 
-    <item android:id="@+id/membership_query"
-        android:icon="@drawable/ic_baseline_card_membership_24"
-        android:title="@string/membership_query"/>
+        <item android:id="@+id/nft_query"
+            android:icon="@drawable/ic_baseline_photo_filter_24"
+            android:title="@string/nft_query"/>
+
+        <item android:id="@+id/membership_query"
+            android:icon="@drawable/ic_baseline_card_membership_24"
+            android:title="@string/membership_query"/>
+    </group>
 
 </menu>
