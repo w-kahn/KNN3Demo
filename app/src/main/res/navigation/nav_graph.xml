@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/MainFragment">
+    app:startDestination="@id/AddressQueryFragment">
 
     <fragment
-        android:id="@+id/MainFragment"
-        android:name="com.wang.kahn.knn3demo.MainFragment"
-        android:label="@string/main_fragment_label"
+        android:id="@+id/AddressQueryFragment"
+        android:name="com.wang.kahn.knn3demo.AddressQueryFragment"
+        android:label="@string/address_query_fragment_label"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/openNftDetail"

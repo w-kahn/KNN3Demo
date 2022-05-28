@@ -16,7 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wang.kahn.knn3demo.databinding.FragmentMainBinding
 
-class MainFragment : Fragment() {
+class AddressQueryFragment : Fragment() {
 
     private val tabs = listOf("NFTs", "RSS3 Follows", "POAP Events")
 

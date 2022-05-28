@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">KNN3 Demo</string>
+    <string name="app_name">Web3 Telescope</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">List Fragment</string>
-    <string name="second_fragment_label">Detail Fragment</string>
-    <string name="main_fragment_label">Main Fragment</string>
+    <string name="second_fragment_label">Detail</string>
+    <string name="address_query_fragment_label">Address Query</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
@@ -46,4 +46,7 @@
     </string>
     <string name="address_text_field_hint">Input address</string>
     <string name="no_data_error">Empty Data</string>
+    <string name="nft_query">NFT</string>
+    <string name="address_query">Address</string>
+    <string name="membership_query">Membership</string>
 </resources>

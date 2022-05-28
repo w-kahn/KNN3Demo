@@ -5,12 +5,12 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.navigation.NavigationView
 import com.wang.kahn.knn3demo.databinding.ActivityMainBinding
 
 const val NUM_PAGES = 5
@@ -32,8 +32,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
+        appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
+        val navControllerFragment = navHostFragment.navController
+        findViewById<NavigationView>(R.id.nav_view).setupWithNavController(navControllerFragment)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -46,9 +52,13 @@ class MainActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
+
         return when (item.itemId) {
             R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+            else -> {
+                val navController = findNavController(R.id.nav_host_fragment_content_main)
+                item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)}
         }
     }
 
