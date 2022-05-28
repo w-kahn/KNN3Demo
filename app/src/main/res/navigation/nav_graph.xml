@@ -9,7 +9,7 @@
         android:id="@+id/address_query"
         android:name="com.wang.kahn.knn3demo.AddressQueryFragment"
         android:label="@string/address_query_fragment_label"
-        tools:layout="@layout/fragment_main">
+        tools:layout="@layout/fragment_address_query">
         <action
             android:id="@+id/openNftDetail"
             app:destination="@id/DetailFragment" />

@@ -43,8 +43,8 @@ class BaseListViewModel<T : Query.Data>(
         }
     }
 
-    fun setEmpty() {
-        empty.value = true
+    fun setEmpty(isEmpty: Boolean) {
+        empty.value = isEmpty
     }
 
 }

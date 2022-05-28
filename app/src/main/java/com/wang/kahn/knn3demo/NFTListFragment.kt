@@ -25,9 +25,10 @@ class NFTListFragment(query: LiveData<String>) : BaseListFragment<NFTQuery.Data>
 
     override fun notifyData(data: NFTQuery.Data) {
         if (data.addrs.isEmpty() || data.addrs[0].holdnfts.isEmpty()) {
-            model.setEmpty()
+            model.setEmpty(true)
             return
         }
+        model.setEmpty(false)
         data.addrs[0].holdnfts.let {
             val adapter = NFTListAdapter(it)
             binding.list.adapter = adapter

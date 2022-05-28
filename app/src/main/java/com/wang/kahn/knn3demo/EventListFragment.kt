@@ -25,9 +25,10 @@ class EventListFragment(query: LiveData<String>) : BaseListFragment<POAPEventsQu
 
     override fun notifyData(data: POAPEventsQuery.Data) {
         if (data.addrs.isEmpty() || data.addrs[0].attendEvents.isEmpty()) {
-            model.setEmpty()
+            model.setEmpty(true)
             return
         }
+        model.setEmpty(false)
 
         binding.list.adapter = EventListAdapter(data.addrs[0].attendEvents)
     }

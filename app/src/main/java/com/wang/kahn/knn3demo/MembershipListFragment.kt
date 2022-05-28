@@ -32,9 +32,10 @@ class MembershipListFragment(query: LiveData<String>) :
 
     override fun notifyData(data: MembershipQuery.Data) {
         if (data.features.isEmpty() || data.features[0].addrsFeature.isEmpty()) {
-            model.setEmpty()
+            model.setEmpty(true)
             return
         }
+        model.setEmpty(false)
         adapter.submitList(data.features[0].addrsFeature)
 
     }

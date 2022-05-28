@@ -1,9 +1,9 @@
 query NFTHolderQuery($nftSymbol: String){
-  nfts(where: { symbol: $nftSymbol }) {
+  nfts(where:{symbol: $nftSymbol}) {
     contract
     symbol
     addrsHold {
-       address
+      address
     }
   }
 }

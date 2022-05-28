@@ -26,14 +26,15 @@ class NFTHoldersFragment(query: LiveData<String>) : BaseListFragment<NFTHolderQu
     }
 
     override fun getQuery(): Query<NFTHolderQuery.Data> {
-        return NFTHolderQuery(Optional.presentIfNotNull(query.value?.lowercase()))
+        return NFTHolderQuery(Optional.presentIfNotNull(query.value))
     }
 
     override fun notifyData(data: NFTHolderQuery.Data) {
         if (data.nfts.isEmpty() || data.nfts[0].addrsHold.isEmpty()) {
-            model.setEmpty()
+            model.setEmpty(true)
             return
         }
+        model.setEmpty(false)
         adapter.submitList(data.nfts[0].addrsHold)
     }
 

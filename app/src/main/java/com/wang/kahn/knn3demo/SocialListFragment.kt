@@ -25,9 +25,10 @@ class SocialListFragment(query: LiveData<String>) : BaseListFragment<SocialQuery
 
     override fun notifyData(data: SocialQuery.Data) {
         if (data.addrs.isEmpty() || data.addrs[0].addrsFollow.isEmpty()) {
-            model.setEmpty()
+            model.setEmpty(true)
             return
         }
+        model.setEmpty(false)
         binding.list.adapter = SocialListAdapter(data.addrs[0].addrsFollow)
     }
 }

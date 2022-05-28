@@ -17,8 +17,8 @@ abstract class NormalQueryFragment : Fragment() {
 
     protected val binding get() = _binding!!
 
-    private val queryContent: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
+    protected open val queryContent: MutableLiveData<String> by lazy {
+        MutableLiveData<String>("invalid init")
     }
 
     override fun onCreateView(
