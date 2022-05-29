@@ -2,7 +2,6 @@ package com.wang.kahn.knn3demo
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.wang.kahn.knn3demo.databinding.NftListItemBinding
@@ -21,8 +20,9 @@ class NFTListAdapter(private val nfts: List<NFTQuery.Holdnft>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val nft = nfts[position]
+        Glide.with(holder.binding.root).load(nft.imageUrl)
+            .placeholder(R.drawable.image_placeholder).into(holder.binding.nftThumb)
         holder.binding.nftName.text = nft.symbol
-        Glide.with(holder.binding.root).load(nft.imageUrl).into(holder.binding.nftThumb)
         holder.binding.root.setOnClickListener {
             onItemClickListener?.invoke(nft)
         }
