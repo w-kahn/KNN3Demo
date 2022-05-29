@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.apollographql.apollo3.api.Optional
 import com.apollographql.apollo3.api.Query
-import com.wang.kahn.knn3demo.databinding.NftHolderListItemBinding
+import com.wang.kahn.knn3demo.databinding.AddressListItemBinding
 
 class NFTHoldersFragment(query: LiveData<String>) : BaseListFragment<NFTHolderQuery.Data>(query) {
 
@@ -38,18 +38,23 @@ class NFTHoldersFragment(query: LiveData<String>) : BaseListFragment<NFTHolderQu
         adapter.submitList(data.nfts[0].addrsHold)
     }
 
-    class ViewHolder(val binding: NftHolderListItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: AddressListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     class Adapter : ListAdapter<NFTHolderQuery.AddrsHold,ViewHolder>(DiffCallback()) {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val binding =
-                NftHolderListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                AddressListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return ViewHolder(binding)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val data = getItem(position)
-            holder.binding.eventId.text = data.address
+            holder.binding.addressText.text = data.address
+            if (!data.ens.isNullOrEmpty()) {
+                holder.binding.addressName.text = data.ens[0]
+            } else {
+                holder.binding.addressName.text = data.name ?: "No ENS"
+            }
         }
     }
 

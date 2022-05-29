@@ -3,6 +3,7 @@ query POAPEventsQuery($addressVar: String){
     attendEvents {
       id
       name
+      imageUrl
     }
   }
 }

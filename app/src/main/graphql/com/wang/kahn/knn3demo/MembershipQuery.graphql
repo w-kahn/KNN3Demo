@@ -3,6 +3,8 @@ query MembershipQuery($featureToQuery: String){
     feature
     addrsFeature {
       address
+      ens
+      name
       if_balance
     }
   }

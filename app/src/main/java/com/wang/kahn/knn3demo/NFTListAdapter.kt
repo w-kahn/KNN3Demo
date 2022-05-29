@@ -23,6 +23,7 @@ class NFTListAdapter(private val nfts: List<NFTQuery.Holdnft>) :
         Glide.with(holder.binding.root).load(nft.imageUrl)
             .placeholder(R.drawable.image_placeholder).into(holder.binding.nftThumb)
         holder.binding.nftName.text = nft.symbol
+        holder.binding.nftContractAddress.text = nft.contract
         holder.binding.root.setOnClickListener {
             onItemClickListener?.invoke(nft)
         }

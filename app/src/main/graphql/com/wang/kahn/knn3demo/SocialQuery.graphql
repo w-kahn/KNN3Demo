@@ -3,6 +3,8 @@ query SocialQuery($addressVar: String){
     address
     addrsFollow {
       address
+      ens
+      name
     }
   }
 }
