@@ -37,6 +37,10 @@
         <argument
             android:name="nft_symbol"
             app:argType="string"/>
+
+        <argument
+            android:name="nft_contract"
+            app:argType="string"/>
     </fragment>
 
     <fragment

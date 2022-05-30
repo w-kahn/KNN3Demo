@@ -42,7 +42,8 @@ class NFTListFragment(query: LiveData<String>) : BaseListFragment<NFTQuery.Data>
                 findNavController().navigate(
                     NFTListFragmentDirections.openNftDetail(
                         nft.imageUrl,
-                        nft.symbol
+                        nft.symbol,
+                        nft.contract
                     )
                 )
             }

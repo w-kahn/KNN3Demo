@@ -35,6 +35,7 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Glide.with(view.context).load(args.nftUrl).into(binding.nftDetailImage)
         binding.nftSymbolText.text = args.nftSymbol
+        binding.nftContractAddress.text = args.nftContract
     }
 
     override fun onDestroyView() {
