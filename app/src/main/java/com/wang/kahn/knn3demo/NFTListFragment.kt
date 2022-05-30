@@ -33,7 +33,9 @@ class NFTListFragment(query: LiveData<String>) : BaseListFragment<NFTQuery.Data>
             return
         }
         model.setEmpty(false)
-        data.addrs[0].holdnfts.let {
+        data.addrs[0].holdnfts
+            .filter { !it.imageUrl.isNullOrBlank() }
+            .let {
             val adapter = NFTListAdapter(it)
             binding.list.adapter = adapter
             adapter.onItemClickListener = { nft ->
