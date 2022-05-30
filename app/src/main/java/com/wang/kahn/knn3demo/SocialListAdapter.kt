@@ -10,7 +10,7 @@ class SocialListAdapter(private val follows: List<SocialQuery.AddrsFollow>) :
 
     class ViewHolder(val binding: AddressListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    var onItemClickListener: ((String) -> Unit)? = null
+    var onItemClickListener: ((SocialQuery.AddrsFollow) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = AddressListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,7 +27,7 @@ class SocialListAdapter(private val follows: List<SocialQuery.AddrsFollow>) :
         holder.binding.addressName.text = follow.name ?: "No Name"
 
         holder.binding.root.setOnClickListener {
-            onItemClickListener?.invoke(follow.address)
+            onItemClickListener?.invoke(follow)
         }
     }
 

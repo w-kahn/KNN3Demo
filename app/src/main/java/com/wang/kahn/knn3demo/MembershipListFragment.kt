@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,6 +63,14 @@ class MembershipListFragment(query: LiveData<String>) :
                 holder.binding.addressName.text = data.name ?: "No ENS"
             }
             holder.binding.addressEns.text = data.if_balance.toString()
+            holder.binding.root.setOnClickListener {
+                copyToClipboard(it.context, data.address)
+                Toast.makeText(
+                    it.context,
+                    R.string.address_has_been_copied_to_clipboard,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 

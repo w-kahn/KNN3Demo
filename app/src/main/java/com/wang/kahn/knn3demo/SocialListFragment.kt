@@ -2,6 +2,7 @@ package com.wang.kahn.knn3demo
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +30,15 @@ class SocialListFragment(query: LiveData<String>) : BaseListFragment<SocialQuery
             return
         }
         model.setEmpty(false)
-        binding.list.adapter = SocialListAdapter(data.addrs[0].addrsFollow)
+        val adapter = SocialListAdapter(data.addrs[0].addrsFollow)
+        binding.list.adapter = adapter
+        adapter.onItemClickListener = {
+            copyToClipboard(requireContext(), it.address)
+            Toast.makeText(
+                requireContext(),
+                R.string.address_has_been_copied_to_clipboard,
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 }

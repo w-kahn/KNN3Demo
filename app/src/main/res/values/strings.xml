@@ -53,4 +53,5 @@
     <string name="membership">Membership</string>
     <string name="membership_query_hint">Input feature</string>
     <string name="nft_query_hint">Input NFT symbol</string>
+    <string name="address_has_been_copied_to_clipboard">The address has been copied to clipboard</string>
 </resources>

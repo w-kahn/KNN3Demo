@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,6 +56,15 @@ class NFTHoldersFragment(query: LiveData<String>) : BaseListFragment<NFTHolderQu
                 holder.binding.addressName.text = data.ens[0]
             } else {
                 holder.binding.addressName.text = data.name ?: "No ENS"
+            }
+
+            holder.binding.root.setOnClickListener {
+                copyToClipboard(it.context, data.address)
+                Toast.makeText(
+                    it.context,
+                    R.string.address_has_been_copied_to_clipboard,
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
