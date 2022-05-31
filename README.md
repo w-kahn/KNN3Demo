@@ -5,6 +5,8 @@
 # Web3 Telescope
 [README 中文版](README-zh.md)
 
+[APK](app-release.apk)
+
 Web3 Telescope is an Android application that allows you to freely explore the world of Web3. Through this application, you can query the NFT owned by any address, and at the same time, you can easily query the holders of a certain NFT. You can query the RSS3 watchlist of any address, the POAP events you have participated in, and the membership attributes of those who hold certain conditional tokens.
 
 ## Address Query
