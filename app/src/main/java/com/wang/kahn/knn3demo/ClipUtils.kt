@@ -3,22 +3,10 @@ package com.wang.kahn.knn3demo
 import android.app.Activity
 import android.app.DownloadManager
 import android.content.*
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Environment
-import android.provider.MediaStore
-import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.core.content.FileProvider
-import androidx.fragment.app.FragmentActivity
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
 import java.io.File
-import java.io.FileInputStream
-import java.io.IOException
-import java.io.InputStream
 
 
 const val DIR_NAME = "Web3Telescope"
@@ -63,12 +51,10 @@ fun downloadImage(imageUrl: String, context: Context) {
 
 fun createName(url: String): String {
     var name = url.substring(url.lastIndexOf('/') + 1, url.length)
-    val NoExt = name.substring(0, name.lastIndexOf('.'))
-    val ext = name.substring(name.lastIndexOf('.'))
-    if (!ext.equals(".gif")) {
-        name = "$NoExt.png"
+    if (name.lastIndexOf('.') < 0) {
+        name += ".png"
     }
-    return name
+    return "${System.currentTimeMillis()}" + name
 }
 
 fun shareImage(file: File, activity: Activity) {
