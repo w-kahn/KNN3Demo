@@ -1,0 +1,10 @@
+query NFTQuery($addressVar: String){
+  addrs(where: { address: $addressVar }) {
+    address
+    holdnfts {
+      contract
+      imageUrl
+      symbol
+    }
+  }
+}

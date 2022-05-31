@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/address_query">
+
+    <fragment
+        android:id="@+id/address_query"
+        android:name="com.wang.kahn.knn3demo.AddressQueryFragment"
+        android:label="@string/address_query_fragment_label"
+        tools:layout="@layout/fragment_address_query">
+        <action
+            android:id="@+id/openNftDetail"
+            app:destination="@id/DetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/NFTListFragment"
+        android:name="com.wang.kahn.knn3demo.NFTListFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_list">
+
+        <action
+            android:id="@+id/openNftDetail"
+            app:destination="@id/DetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/DetailFragment"
+        android:name="com.wang.kahn.knn3demo.DetailFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="nft_url"
+            app:argType="string"
+            app:nullable="true"/>
+        <argument
+            android:name="nft_symbol"
+            app:argType="string"/>
+
+        <argument
+            android:name="nft_contract"
+            app:argType="string"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/nft_query"
+        android:name="com.wang.kahn.knn3demo.NFTQueryFragment"
+        android:label="@string/nft_holders"/>
+
+    <fragment
+        android:id="@+id/membership_query"
+        android:name="com.wang.kahn.knn3demo.MembershipQueryFragment"
+        android:label="@string/membership" />
+
+</navigation>

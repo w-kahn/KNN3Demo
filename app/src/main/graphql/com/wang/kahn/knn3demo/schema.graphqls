@@ -1,0 +1,2016 @@
+type Query {
+  addrs(where: AddrWhere, options: AddrOptions): [Addr!]!
+  addrsAggregate(where: AddrWhere): AddrAggregateSelection!
+  events(where: EventWhere, options: EventOptions): [Event!]!
+  eventsAggregate(where: EventWhere): EventAggregateSelection!
+  features(where: FeatureWhere, options: FeatureOptions): [Feature!]!
+  featuresAggregate(where: FeatureWhere): FeatureAggregateSelection!
+  nfts(where: NFTWhere, options: NFTOptions): [NFT!]!
+  nftsAggregate(where: NFTWhere): NFTAggregateSelection!
+}
+
+# A BigInt value up to 64 bits in size, which can be a number or a string if used inline, or a string only if used as a variable. Always returned as a string.
+scalar BigInt
+
+enum SortDirection {
+  # Sort by field values in ascending order.
+  ASC
+
+  # Sort by field values in descending order.
+  DESC
+}
+
+interface FeatureProperties {
+  contract: String
+  status: BigInt
+  task1: BigInt
+  task2: BigInt
+  task3: BigInt
+}
+
+type Addr {
+  address: String!
+  chainId: String
+  ens: [String]
+  ens_expiry_date: String
+  if_balance: Float
+  name: String
+  addrsFollow(
+    where: AddrWhere
+    options: AddrOptions
+    directed: Boolean = true
+  ): [Addr!]!
+  addrsFollowAggregate(
+    where: AddrWhere
+    directed: Boolean = true
+  ): AddrAddrAddrsFollowAggregationSelection
+  attendEvents(
+    where: EventWhere
+    options: EventOptions
+    directed: Boolean = true
+  ): [Event!]!
+  attendEventsAggregate(
+    where: EventWhere
+    directed: Boolean = true
+  ): AddrEventAttendEventsAggregationSelection
+  featureFeatures(
+    where: FeatureWhere
+    options: FeatureOptions
+    directed: Boolean = true
+  ): [Feature!]!
+  featureFeaturesAggregate(
+    where: FeatureWhere
+    directed: Boolean = true
+  ): AddrFeatureFeatureFeaturesAggregationSelection
+  followAddrs(
+    where: AddrWhere
+    options: AddrOptions
+    directed: Boolean = true
+  ): [Addr!]!
+  followAddrsAggregate(
+    where: AddrWhere
+    directed: Boolean = true
+  ): AddrAddrFollowAddrsAggregationSelection
+  holdnfts(
+    where: NFTWhere
+    options: NFTOptions
+    directed: Boolean = true
+  ): [NFT!]!
+  holdnftsAggregate(
+    where: NFTWhere
+    directed: Boolean = true
+  ): AddrNFTHoldnftsAggregationSelection
+  addrsFollowConnection(
+    where: AddrAddrsFollowConnectionWhere
+    first: Int
+    after: String
+    directed: Boolean = true
+    sort: [AddrAddrsFollowConnectionSort!]
+  ): AddrAddrsFollowConnection!
+  attendEventsConnection(
+    where: AddrAttendEventsConnectionWhere
+    first: Int
+    after: String
+    directed: Boolean = true
+    sort: [AddrAttendEventsConnectionSort!]
+  ): AddrAttendEventsConnection!
+  featureFeaturesConnection(
+    where: AddrFeatureFeaturesConnectionWhere
+    first: Int
+    after: String
+    directed: Boolean = true
+    sort: [AddrFeatureFeaturesConnectionSort!]
+  ): AddrFeatureFeaturesConnection!
+  followAddrsConnection(
+    where: AddrFollowAddrsConnectionWhere
+    first: Int
+    after: String
+    directed: Boolean = true
+    sort: [AddrFollowAddrsConnectionSort!]
+  ): AddrFollowAddrsConnection!
+  holdnftsConnection(
+    where: AddrHoldnftsConnectionWhere
+    first: Int
+    after: String
+    directed: Boolean = true
+    sort: [AddrHoldnftsConnectionSort!]
+  ): AddrHoldnftsConnection!
+}
+
+type AddrAddrAddrsFollowAggregationSelection {
+  count: Int!
+  node: AddrAddrAddrsFollowNodeAggregateSelection
+}
+
+type AddrAddrAddrsFollowNodeAggregateSelection {
+  address: StringAggregateSelectionNonNullable!
+  chainId: StringAggregateSelectionNullable!
+  ens_expiry_date: StringAggregateSelectionNullable!
+  if_balance: FloatAggregateSelectionNullable!
+  name: StringAggregateSelectionNullable!
+}
+
+type AddrAddrFollowAddrsAggregationSelection {
+  count: Int!
+  node: AddrAddrFollowAddrsNodeAggregateSelection
+}
+
+type AddrAddrFollowAddrsNodeAggregateSelection {
+  address: StringAggregateSelectionNonNullable!
+  chainId: StringAggregateSelectionNullable!
+  ens_expiry_date: StringAggregateSelectionNullable!
+  if_balance: FloatAggregateSelectionNullable!
+  name: StringAggregateSelectionNullable!
+}
+
+type AddrAddrsFollowConnection {
+  edges: [AddrAddrsFollowRelationship!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+type AddrAddrsFollowRelationship {
+  cursor: String!
+  node: Addr!
+}
+
+type AddrAggregateSelection {
+  count: Int!
+  address: StringAggregateSelectionNonNullable!
+  chainId: StringAggregateSelectionNullable!
+  ens_expiry_date: StringAggregateSelectionNullable!
+  if_balance: FloatAggregateSelectionNullable!
+  name: StringAggregateSelectionNullable!
+}
+
+type AddrAttendEventsConnection {
+  edges: [AddrAttendEventsRelationship!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+type AddrAttendEventsRelationship {
+  cursor: String!
+  node: Event!
+}
+
+type AddrEventAttendEventsAggregationSelection {
+  count: Int!
+  node: AddrEventAttendEventsNodeAggregateSelection
+}
+
+type AddrEventAttendEventsNodeAggregateSelection {
+  id: StringAggregateSelectionNonNullable!
+  imageUrl: StringAggregateSelectionNullable!
+  name: StringAggregateSelectionNonNullable!
+}
+
+type AddrFeatureFeatureFeaturesAggregationSelection {
+  count: Int!
+  node: AddrFeatureFeatureFeaturesNodeAggregateSelection
+  edge: AddrFeatureFeatureFeaturesEdgeAggregateSelection
+}
+
+type AddrFeatureFeatureFeaturesEdgeAggregateSelection {
+  contract: StringAggregateSelectionNullable!
+  status: BigIntAggregateSelectionNullable!
+  task1: BigIntAggregateSelectionNullable!
+  task2: BigIntAggregateSelectionNullable!
+  task3: BigIntAggregateSelectionNullable!
+}
+
+type AddrFeatureFeatureFeaturesNodeAggregateSelection {
+  feature: StringAggregateSelectionNonNullable!
+  projectName: StringAggregateSelectionNullable!
+}
+
+type AddrFeatureFeaturesConnection {
+  edges: [AddrFeatureFeaturesRelationship!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+type AddrFeatureFeaturesRelationship implements FeatureProperties {
+  cursor: String!
+  node: Feature!
+  contract: String
+  status: BigInt
+  task1: BigInt
+  task2: BigInt
+  task3: BigInt
+}
+
+type AddrFollowAddrsConnection {
+  edges: [AddrFollowAddrsRelationship!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+type AddrFollowAddrsRelationship {
+  cursor: String!
+  node: Addr!
+}
+
+type AddrHoldnftsConnection {
+  edges: [AddrHoldnftsRelationship!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+type AddrHoldnftsRelationship {
+  cursor: String!
+  node: NFT!
+}
+
+type AddrNFTHoldnftsAggregationSelection {
+  count: Int!
+  node: AddrNFTHoldnftsNodeAggregateSelection
+}
+
+type AddrNFTHoldnftsNodeAggregateSelection {
+  contract: StringAggregateSelectionNonNullable!
+  imageUrl: StringAggregateSelectionNullable!
+  symbol: StringAggregateSelectionNonNullable!
+}
+
+type BigIntAggregateSelectionNullable {
+  max: BigInt
+  min: BigInt
+  average: BigInt
+  sum: BigInt
+}
+
+type Event {
+  id: String!
+  imageUrl: String
+  name: String!
+  addrsAttend(
+    where: AddrWhere
+    options: AddrOptions
+    directed: Boolean = true
+  ): [Addr!]!
+  addrsAttendAggregate(
+    where: AddrWhere
+    directed: Boolean = true
+  ): EventAddrAddrsAttendAggregationSelection
+  addrsAttendConnection(
+    where: EventAddrsAttendConnectionWhere
+    first: Int
+    after: String
+    directed: Boolean = true
+    sort: [EventAddrsAttendConnectionSort!]
+  ): EventAddrsAttendConnection!
+}
+
+type EventAddrAddrsAttendAggregationSelection {
+  count: Int!
+  node: EventAddrAddrsAttendNodeAggregateSelection
+}
+
+type EventAddrAddrsAttendNodeAggregateSelection {
+  address: StringAggregateSelectionNonNullable!
+  chainId: StringAggregateSelectionNullable!
+  ens_expiry_date: StringAggregateSelectionNullable!
+  if_balance: FloatAggregateSelectionNullable!
+  name: StringAggregateSelectionNullable!
+}
+
+type EventAddrsAttendConnection {
+  edges: [EventAddrsAttendRelationship!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+type EventAddrsAttendRelationship {
+  cursor: String!
+  node: Addr!
+}
+
+type EventAggregateSelection {
+  count: Int!
+  id: StringAggregateSelectionNonNullable!
+  imageUrl: StringAggregateSelectionNullable!
+  name: StringAggregateSelectionNonNullable!
+}
+
+type Feature {
+  feature: String!
+  projectName: String
+  addrsFeature(
+    where: AddrWhere
+    options: AddrOptions
+    directed: Boolean = true
+  ): [Addr!]!
+  addrsFeatureAggregate(
+    where: AddrWhere
+    directed: Boolean = true
+  ): FeatureAddrAddrsFeatureAggregationSelection
+  addrsFeatureConnection(
+    where: FeatureAddrsFeatureConnectionWhere
+    first: Int
+    after: String
+    directed: Boolean = true
+    sort: [FeatureAddrsFeatureConnectionSort!]
+  ): FeatureAddrsFeatureConnection!
+}
+
+type FeatureAddrAddrsFeatureAggregationSelection {
+  count: Int!
+  node: FeatureAddrAddrsFeatureNodeAggregateSelection
+  edge: FeatureAddrAddrsFeatureEdgeAggregateSelection
+}
+
+type FeatureAddrAddrsFeatureEdgeAggregateSelection {
+  contract: StringAggregateSelectionNullable!
+  status: BigIntAggregateSelectionNullable!
+  task1: BigIntAggregateSelectionNullable!
+  task2: BigIntAggregateSelectionNullable!
+  task3: BigIntAggregateSelectionNullable!
+}
+
+type FeatureAddrAddrsFeatureNodeAggregateSelection {
+  address: StringAggregateSelectionNonNullable!
+  chainId: StringAggregateSelectionNullable!
+  ens_expiry_date: StringAggregateSelectionNullable!
+  if_balance: FloatAggregateSelectionNullable!
+  name: StringAggregateSelectionNullable!
+}
+
+type FeatureAddrsFeatureConnection {
+  edges: [FeatureAddrsFeatureRelationship!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+type FeatureAddrsFeatureRelationship implements FeatureProperties {
+  cursor: String!
+  node: Addr!
+  contract: String
+  status: BigInt
+  task1: BigInt
+  task2: BigInt
+  task3: BigInt
+}
+
+type FeatureAggregateSelection {
+  count: Int!
+  feature: StringAggregateSelectionNonNullable!
+  projectName: StringAggregateSelectionNullable!
+}
+
+type FloatAggregateSelectionNullable {
+  max: Float
+  min: Float
+  average: Float
+  sum: Float
+}
+
+type NFT {
+  contract: String!
+  imageUrl: String
+  symbol: String!
+  addrsHold(
+    where: AddrWhere
+    options: AddrOptions
+    directed: Boolean = true
+  ): [Addr!]!
+  addrsHoldAggregate(
+    where: AddrWhere
+    directed: Boolean = true
+  ): NFTAddrAddrsHoldAggregationSelection
+  addrsHoldConnection(
+    where: NFTAddrsHoldConnectionWhere
+    first: Int
+    after: String
+    directed: Boolean = true
+    sort: [NFTAddrsHoldConnectionSort!]
+  ): NFTAddrsHoldConnection!
+}
+
+type NFTAddrAddrsHoldAggregationSelection {
+  count: Int!
+  node: NFTAddrAddrsHoldNodeAggregateSelection
+}
+
+type NFTAddrAddrsHoldNodeAggregateSelection {
+  address: StringAggregateSelectionNonNullable!
+  chainId: StringAggregateSelectionNullable!
+  ens_expiry_date: StringAggregateSelectionNullable!
+  if_balance: FloatAggregateSelectionNullable!
+  name: StringAggregateSelectionNullable!
+}
+
+type NFTAddrsHoldConnection {
+  edges: [NFTAddrsHoldRelationship!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+type NFTAddrsHoldRelationship {
+  cursor: String!
+  node: Addr!
+}
+
+type NFTAggregateSelection {
+  count: Int!
+  contract: StringAggregateSelectionNonNullable!
+  imageUrl: StringAggregateSelectionNullable!
+  symbol: StringAggregateSelectionNonNullable!
+}
+
+# Pagination information (Relay)
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type StringAggregateSelectionNonNullable {
+  shortest: String!
+  longest: String!
+}
+
+type StringAggregateSelectionNullable {
+  shortest: String
+  longest: String
+}
+
+input AddrAddrsFollowAggregateInput {
+  count: Int
+  count_LT: Int
+  count_LTE: Int
+  count_GT: Int
+  count_GTE: Int
+  AND: [AddrAddrsFollowAggregateInput!]
+  OR: [AddrAddrsFollowAggregateInput!]
+  node: AddrAddrsFollowNodeAggregationWhereInput
+}
+
+input AddrAddrsFollowConnectionSort {
+  node: AddrSort
+}
+
+input AddrAddrsFollowConnectionWhere {
+  AND: [AddrAddrsFollowConnectionWhere!]
+  OR: [AddrAddrsFollowConnectionWhere!]
+  node: AddrWhere
+  node_NOT: AddrWhere
+}
+
+input AddrAddrsFollowNodeAggregationWhereInput {
+  AND: [AddrAddrsFollowNodeAggregationWhereInput!]
+  OR: [AddrAddrsFollowNodeAggregationWhereInput!]
+  address_EQUAL: String
+  address_AVERAGE_EQUAL: Float
+  address_LONGEST_EQUAL: Int
+  address_SHORTEST_EQUAL: Int
+  address_GT: Int
+  address_AVERAGE_GT: Float
+  address_LONGEST_GT: Int
+  address_SHORTEST_GT: Int
+  address_GTE: Int
+  address_AVERAGE_GTE: Float
+  address_LONGEST_GTE: Int
+  address_SHORTEST_GTE: Int
+  address_LT: Int
+  address_AVERAGE_LT: Float
+  address_LONGEST_LT: Int
+  address_SHORTEST_LT: Int
+  address_LTE: Int
+  address_AVERAGE_LTE: Float
+  address_LONGEST_LTE: Int
+  address_SHORTEST_LTE: Int
+  chainId_EQUAL: String
+  chainId_AVERAGE_EQUAL: Float
+  chainId_LONGEST_EQUAL: Int
+  chainId_SHORTEST_EQUAL: Int
+  chainId_GT: Int
+  chainId_AVERAGE_GT: Float
+  chainId_LONGEST_GT: Int
+  chainId_SHORTEST_GT: Int
+  chainId_GTE: Int
+  chainId_AVERAGE_GTE: Float
+  chainId_LONGEST_GTE: Int
+  chainId_SHORTEST_GTE: Int
+  chainId_LT: Int
+  chainId_AVERAGE_LT: Float
+  chainId_LONGEST_LT: Int
+  chainId_SHORTEST_LT: Int
+  chainId_LTE: Int
+  chainId_AVERAGE_LTE: Float
+  chainId_LONGEST_LTE: Int
+  chainId_SHORTEST_LTE: Int
+  ens_expiry_date_EQUAL: String
+  ens_expiry_date_AVERAGE_EQUAL: Float
+  ens_expiry_date_LONGEST_EQUAL: Int
+  ens_expiry_date_SHORTEST_EQUAL: Int
+  ens_expiry_date_GT: Int
+  ens_expiry_date_AVERAGE_GT: Float
+  ens_expiry_date_LONGEST_GT: Int
+  ens_expiry_date_SHORTEST_GT: Int
+  ens_expiry_date_GTE: Int
+  ens_expiry_date_AVERAGE_GTE: Float
+  ens_expiry_date_LONGEST_GTE: Int
+  ens_expiry_date_SHORTEST_GTE: Int
+  ens_expiry_date_LT: Int
+  ens_expiry_date_AVERAGE_LT: Float
+  ens_expiry_date_LONGEST_LT: Int
+  ens_expiry_date_SHORTEST_LT: Int
+  ens_expiry_date_LTE: Int
+  ens_expiry_date_AVERAGE_LTE: Float
+  ens_expiry_date_LONGEST_LTE: Int
+  ens_expiry_date_SHORTEST_LTE: Int
+  name_EQUAL: String
+  name_AVERAGE_EQUAL: Float
+  name_LONGEST_EQUAL: Int
+  name_SHORTEST_EQUAL: Int
+  name_GT: Int
+  name_AVERAGE_GT: Float
+  name_LONGEST_GT: Int
+  name_SHORTEST_GT: Int
+  name_GTE: Int
+  name_AVERAGE_GTE: Float
+  name_LONGEST_GTE: Int
+  name_SHORTEST_GTE: Int
+  name_LT: Int
+  name_AVERAGE_LT: Float
+  name_LONGEST_LT: Int
+  name_SHORTEST_LT: Int
+  name_LTE: Int
+  name_AVERAGE_LTE: Float
+  name_LONGEST_LTE: Int
+  name_SHORTEST_LTE: Int
+  if_balance_EQUAL: Float
+  if_balance_AVERAGE_EQUAL: Float
+  if_balance_MIN_EQUAL: Float
+  if_balance_MAX_EQUAL: Float
+  if_balance_SUM_EQUAL: Float
+  if_balance_GT: Float
+  if_balance_AVERAGE_GT: Float
+  if_balance_MIN_GT: Float
+  if_balance_MAX_GT: Float
+  if_balance_SUM_GT: Float
+  if_balance_GTE: Float
+  if_balance_AVERAGE_GTE: Float
+  if_balance_MIN_GTE: Float
+  if_balance_MAX_GTE: Float
+  if_balance_SUM_GTE: Float
+  if_balance_LT: Float
+  if_balance_AVERAGE_LT: Float
+  if_balance_MIN_LT: Float
+  if_balance_MAX_LT: Float
+  if_balance_SUM_LT: Float
+  if_balance_LTE: Float
+  if_balance_AVERAGE_LTE: Float
+  if_balance_MIN_LTE: Float
+  if_balance_MAX_LTE: Float
+  if_balance_SUM_LTE: Float
+}
+
+input AddrAttendEventsAggregateInput {
+  count: Int
+  count_LT: Int
+  count_LTE: Int
+  count_GT: Int
+  count_GTE: Int
+  AND: [AddrAttendEventsAggregateInput!]
+  OR: [AddrAttendEventsAggregateInput!]
+  node: AddrAttendEventsNodeAggregationWhereInput
+}
+
+input AddrAttendEventsConnectionSort {
+  node: EventSort
+}
+
+input AddrAttendEventsConnectionWhere {
+  AND: [AddrAttendEventsConnectionWhere!]
+  OR: [AddrAttendEventsConnectionWhere!]
+  node: EventWhere
+  node_NOT: EventWhere
+}
+
+input AddrAttendEventsNodeAggregationWhereInput {
+  AND: [AddrAttendEventsNodeAggregationWhereInput!]
+  OR: [AddrAttendEventsNodeAggregationWhereInput!]
+  id_EQUAL: String
+  id_AVERAGE_EQUAL: Float
+  id_LONGEST_EQUAL: Int
+  id_SHORTEST_EQUAL: Int
+  id_GT: Int
+  id_AVERAGE_GT: Float
+  id_LONGEST_GT: Int
+  id_SHORTEST_GT: Int
+  id_GTE: Int
+  id_AVERAGE_GTE: Float
+  id_LONGEST_GTE: Int
+  id_SHORTEST_GTE: Int
+  id_LT: Int
+  id_AVERAGE_LT: Float
+  id_LONGEST_LT: Int
+  id_SHORTEST_LT: Int
+  id_LTE: Int
+  id_AVERAGE_LTE: Float
+  id_LONGEST_LTE: Int
+  id_SHORTEST_LTE: Int
+  imageUrl_EQUAL: String
+  imageUrl_AVERAGE_EQUAL: Float
+  imageUrl_LONGEST_EQUAL: Int
+  imageUrl_SHORTEST_EQUAL: Int
+  imageUrl_GT: Int
+  imageUrl_AVERAGE_GT: Float
+  imageUrl_LONGEST_GT: Int
+  imageUrl_SHORTEST_GT: Int
+  imageUrl_GTE: Int
+  imageUrl_AVERAGE_GTE: Float
+  imageUrl_LONGEST_GTE: Int
+  imageUrl_SHORTEST_GTE: Int
+  imageUrl_LT: Int
+  imageUrl_AVERAGE_LT: Float
+  imageUrl_LONGEST_LT: Int
+  imageUrl_SHORTEST_LT: Int
+  imageUrl_LTE: Int
+  imageUrl_AVERAGE_LTE: Float
+  imageUrl_LONGEST_LTE: Int
+  imageUrl_SHORTEST_LTE: Int
+  name_EQUAL: String
+  name_AVERAGE_EQUAL: Float
+  name_LONGEST_EQUAL: Int
+  name_SHORTEST_EQUAL: Int
+  name_GT: Int
+  name_AVERAGE_GT: Float
+  name_LONGEST_GT: Int
+  name_SHORTEST_GT: Int
+  name_GTE: Int
+  name_AVERAGE_GTE: Float
+  name_LONGEST_GTE: Int
+  name_SHORTEST_GTE: Int
+  name_LT: Int
+  name_AVERAGE_LT: Float
+  name_LONGEST_LT: Int
+  name_SHORTEST_LT: Int
+  name_LTE: Int
+  name_AVERAGE_LTE: Float
+  name_LONGEST_LTE: Int
+  name_SHORTEST_LTE: Int
+}
+
+input AddrFeatureFeaturesAggregateInput {
+  count: Int
+  count_LT: Int
+  count_LTE: Int
+  count_GT: Int
+  count_GTE: Int
+  AND: [AddrFeatureFeaturesAggregateInput!]
+  OR: [AddrFeatureFeaturesAggregateInput!]
+  node: AddrFeatureFeaturesNodeAggregationWhereInput
+  edge: AddrFeatureFeaturesEdgeAggregationWhereInput
+}
+
+input AddrFeatureFeaturesConnectionSort {
+  edge: FeaturePropertiesSort
+  node: FeatureSort
+}
+
+input AddrFeatureFeaturesConnectionWhere {
+  AND: [AddrFeatureFeaturesConnectionWhere!]
+  OR: [AddrFeatureFeaturesConnectionWhere!]
+  edge: FeaturePropertiesWhere
+  edge_NOT: FeaturePropertiesWhere
+  node: FeatureWhere
+  node_NOT: FeatureWhere
+}
+
+input AddrFeatureFeaturesEdgeAggregationWhereInput {
+  AND: [AddrFeatureFeaturesEdgeAggregationWhereInput!]
+  OR: [AddrFeatureFeaturesEdgeAggregationWhereInput!]
+  contract_EQUAL: String
+  contract_AVERAGE_EQUAL: Float
+  contract_LONGEST_EQUAL: Int
+  contract_SHORTEST_EQUAL: Int
+  contract_GT: Int
+  contract_AVERAGE_GT: Float
+  contract_LONGEST_GT: Int
+  contract_SHORTEST_GT: Int
+  contract_GTE: Int
+  contract_AVERAGE_GTE: Float
+  contract_LONGEST_GTE: Int
+  contract_SHORTEST_GTE: Int
+  contract_LT: Int
+  contract_AVERAGE_LT: Float
+  contract_LONGEST_LT: Int
+  contract_SHORTEST_LT: Int
+  contract_LTE: Int
+  contract_AVERAGE_LTE: Float
+  contract_LONGEST_LTE: Int
+  contract_SHORTEST_LTE: Int
+  status_EQUAL: BigInt
+  status_AVERAGE_EQUAL: BigInt
+  status_MIN_EQUAL: BigInt
+  status_MAX_EQUAL: BigInt
+  status_SUM_EQUAL: BigInt
+  status_GT: BigInt
+  status_AVERAGE_GT: BigInt
+  status_MIN_GT: BigInt
+  status_MAX_GT: BigInt
+  status_SUM_GT: BigInt
+  status_GTE: BigInt
+  status_AVERAGE_GTE: BigInt
+  status_MIN_GTE: BigInt
+  status_MAX_GTE: BigInt
+  status_SUM_GTE: BigInt
+  status_LT: BigInt
+  status_AVERAGE_LT: BigInt
+  status_MIN_LT: BigInt
+  status_MAX_LT: BigInt
+  status_SUM_LT: BigInt
+  status_LTE: BigInt
+  status_AVERAGE_LTE: BigInt
+  status_MIN_LTE: BigInt
+  status_MAX_LTE: BigInt
+  status_SUM_LTE: BigInt
+  task1_EQUAL: BigInt
+  task1_AVERAGE_EQUAL: BigInt
+  task1_MIN_EQUAL: BigInt
+  task1_MAX_EQUAL: BigInt
+  task1_SUM_EQUAL: BigInt
+  task1_GT: BigInt
+  task1_AVERAGE_GT: BigInt
+  task1_MIN_GT: BigInt
+  task1_MAX_GT: BigInt
+  task1_SUM_GT: BigInt
+  task1_GTE: BigInt
+  task1_AVERAGE_GTE: BigInt
+  task1_MIN_GTE: BigInt
+  task1_MAX_GTE: BigInt
+  task1_SUM_GTE: BigInt
+  task1_LT: BigInt
+  task1_AVERAGE_LT: BigInt
+  task1_MIN_LT: BigInt
+  task1_MAX_LT: BigInt
+  task1_SUM_LT: BigInt
+  task1_LTE: BigInt
+  task1_AVERAGE_LTE: BigInt
+  task1_MIN_LTE: BigInt
+  task1_MAX_LTE: BigInt
+  task1_SUM_LTE: BigInt
+  task2_EQUAL: BigInt
+  task2_AVERAGE_EQUAL: BigInt
+  task2_MIN_EQUAL: BigInt
+  task2_MAX_EQUAL: BigInt
+  task2_SUM_EQUAL: BigInt
+  task2_GT: BigInt
+  task2_AVERAGE_GT: BigInt
+  task2_MIN_GT: BigInt
+  task2_MAX_GT: BigInt
+  task2_SUM_GT: BigInt
+  task2_GTE: BigInt
+  task2_AVERAGE_GTE: BigInt
+  task2_MIN_GTE: BigInt
+  task2_MAX_GTE: BigInt
+  task2_SUM_GTE: BigInt
+  task2_LT: BigInt
+  task2_AVERAGE_LT: BigInt
+  task2_MIN_LT: BigInt
+  task2_MAX_LT: BigInt
+  task2_SUM_LT: BigInt
+  task2_LTE: BigInt
+  task2_AVERAGE_LTE: BigInt
+  task2_MIN_LTE: BigInt
+  task2_MAX_LTE: BigInt
+  task2_SUM_LTE: BigInt
+  task3_EQUAL: BigInt
+  task3_AVERAGE_EQUAL: BigInt
+  task3_MIN_EQUAL: BigInt
+  task3_MAX_EQUAL: BigInt
+  task3_SUM_EQUAL: BigInt
+  task3_GT: BigInt
+  task3_AVERAGE_GT: BigInt
+  task3_MIN_GT: BigInt
+  task3_MAX_GT: BigInt
+  task3_SUM_GT: BigInt
+  task3_GTE: BigInt
+  task3_AVERAGE_GTE: BigInt
+  task3_MIN_GTE: BigInt
+  task3_MAX_GTE: BigInt
+  task3_SUM_GTE: BigInt
+  task3_LT: BigInt
+  task3_AVERAGE_LT: BigInt
+  task3_MIN_LT: BigInt
+  task3_MAX_LT: BigInt
+  task3_SUM_LT: BigInt
+  task3_LTE: BigInt
+  task3_AVERAGE_LTE: BigInt
+  task3_MIN_LTE: BigInt
+  task3_MAX_LTE: BigInt
+  task3_SUM_LTE: BigInt
+}
+
+input AddrFeatureFeaturesNodeAggregationWhereInput {
+  AND: [AddrFeatureFeaturesNodeAggregationWhereInput!]
+  OR: [AddrFeatureFeaturesNodeAggregationWhereInput!]
+  feature_EQUAL: String
+  feature_AVERAGE_EQUAL: Float
+  feature_LONGEST_EQUAL: Int
+  feature_SHORTEST_EQUAL: Int
+  feature_GT: Int
+  feature_AVERAGE_GT: Float
+  feature_LONGEST_GT: Int
+  feature_SHORTEST_GT: Int
+  feature_GTE: Int
+  feature_AVERAGE_GTE: Float
+  feature_LONGEST_GTE: Int
+  feature_SHORTEST_GTE: Int
+  feature_LT: Int
+  feature_AVERAGE_LT: Float
+  feature_LONGEST_LT: Int
+  feature_SHORTEST_LT: Int
+  feature_LTE: Int
+  feature_AVERAGE_LTE: Float
+  feature_LONGEST_LTE: Int
+  feature_SHORTEST_LTE: Int
+  projectName_EQUAL: String
+  projectName_AVERAGE_EQUAL: Float
+  projectName_LONGEST_EQUAL: Int
+  projectName_SHORTEST_EQUAL: Int
+  projectName_GT: Int
+  projectName_AVERAGE_GT: Float
+  projectName_LONGEST_GT: Int
+  projectName_SHORTEST_GT: Int
+  projectName_GTE: Int
+  projectName_AVERAGE_GTE: Float
+  projectName_LONGEST_GTE: Int
+  projectName_SHORTEST_GTE: Int
+  projectName_LT: Int
+  projectName_AVERAGE_LT: Float
+  projectName_LONGEST_LT: Int
+  projectName_SHORTEST_LT: Int
+  projectName_LTE: Int
+  projectName_AVERAGE_LTE: Float
+  projectName_LONGEST_LTE: Int
+  projectName_SHORTEST_LTE: Int
+}
+
+input AddrFollowAddrsAggregateInput {
+  count: Int
+  count_LT: Int
+  count_LTE: Int
+  count_GT: Int
+  count_GTE: Int
+  AND: [AddrFollowAddrsAggregateInput!]
+  OR: [AddrFollowAddrsAggregateInput!]
+  node: AddrFollowAddrsNodeAggregationWhereInput
+}
+
+input AddrFollowAddrsConnectionSort {
+  node: AddrSort
+}
+
+input AddrFollowAddrsConnectionWhere {
+  AND: [AddrFollowAddrsConnectionWhere!]
+  OR: [AddrFollowAddrsConnectionWhere!]
+  node: AddrWhere
+  node_NOT: AddrWhere
+}
+
+input AddrFollowAddrsNodeAggregationWhereInput {
+  AND: [AddrFollowAddrsNodeAggregationWhereInput!]
+  OR: [AddrFollowAddrsNodeAggregationWhereInput!]
+  address_EQUAL: String
+  address_AVERAGE_EQUAL: Float
+  address_LONGEST_EQUAL: Int
+  address_SHORTEST_EQUAL: Int
+  address_GT: Int
+  address_AVERAGE_GT: Float
+  address_LONGEST_GT: Int
+  address_SHORTEST_GT: Int
+  address_GTE: Int
+  address_AVERAGE_GTE: Float
+  address_LONGEST_GTE: Int
+  address_SHORTEST_GTE: Int
+  address_LT: Int
+  address_AVERAGE_LT: Float
+  address_LONGEST_LT: Int
+  address_SHORTEST_LT: Int
+  address_LTE: Int
+  address_AVERAGE_LTE: Float
+  address_LONGEST_LTE: Int
+  address_SHORTEST_LTE: Int
+  chainId_EQUAL: String
+  chainId_AVERAGE_EQUAL: Float
+  chainId_LONGEST_EQUAL: Int
+  chainId_SHORTEST_EQUAL: Int
+  chainId_GT: Int
+  chainId_AVERAGE_GT: Float
+  chainId_LONGEST_GT: Int
+  chainId_SHORTEST_GT: Int
+  chainId_GTE: Int
+  chainId_AVERAGE_GTE: Float
+  chainId_LONGEST_GTE: Int
+  chainId_SHORTEST_GTE: Int
+  chainId_LT: Int
+  chainId_AVERAGE_LT: Float
+  chainId_LONGEST_LT: Int
+  chainId_SHORTEST_LT: Int
+  chainId_LTE: Int
+  chainId_AVERAGE_LTE: Float
+  chainId_LONGEST_LTE: Int
+  chainId_SHORTEST_LTE: Int
+  ens_expiry_date_EQUAL: String
+  ens_expiry_date_AVERAGE_EQUAL: Float
+  ens_expiry_date_LONGEST_EQUAL: Int
+  ens_expiry_date_SHORTEST_EQUAL: Int
+  ens_expiry_date_GT: Int
+  ens_expiry_date_AVERAGE_GT: Float
+  ens_expiry_date_LONGEST_GT: Int
+  ens_expiry_date_SHORTEST_GT: Int
+  ens_expiry_date_GTE: Int
+  ens_expiry_date_AVERAGE_GTE: Float
+  ens_expiry_date_LONGEST_GTE: Int
+  ens_expiry_date_SHORTEST_GTE: Int
+  ens_expiry_date_LT: Int
+  ens_expiry_date_AVERAGE_LT: Float
+  ens_expiry_date_LONGEST_LT: Int
+  ens_expiry_date_SHORTEST_LT: Int
+  ens_expiry_date_LTE: Int
+  ens_expiry_date_AVERAGE_LTE: Float
+  ens_expiry_date_LONGEST_LTE: Int
+  ens_expiry_date_SHORTEST_LTE: Int
+  name_EQUAL: String
+  name_AVERAGE_EQUAL: Float
+  name_LONGEST_EQUAL: Int
+  name_SHORTEST_EQUAL: Int
+  name_GT: Int
+  name_AVERAGE_GT: Float
+  name_LONGEST_GT: Int
+  name_SHORTEST_GT: Int
+  name_GTE: Int
+  name_AVERAGE_GTE: Float
+  name_LONGEST_GTE: Int
+  name_SHORTEST_GTE: Int
+  name_LT: Int
+  name_AVERAGE_LT: Float
+  name_LONGEST_LT: Int
+  name_SHORTEST_LT: Int
+  name_LTE: Int
+  name_AVERAGE_LTE: Float
+  name_LONGEST_LTE: Int
+  name_SHORTEST_LTE: Int
+  if_balance_EQUAL: Float
+  if_balance_AVERAGE_EQUAL: Float
+  if_balance_MIN_EQUAL: Float
+  if_balance_MAX_EQUAL: Float
+  if_balance_SUM_EQUAL: Float
+  if_balance_GT: Float
+  if_balance_AVERAGE_GT: Float
+  if_balance_MIN_GT: Float
+  if_balance_MAX_GT: Float
+  if_balance_SUM_GT: Float
+  if_balance_GTE: Float
+  if_balance_AVERAGE_GTE: Float
+  if_balance_MIN_GTE: Float
+  if_balance_MAX_GTE: Float
+  if_balance_SUM_GTE: Float
+  if_balance_LT: Float
+  if_balance_AVERAGE_LT: Float
+  if_balance_MIN_LT: Float
+  if_balance_MAX_LT: Float
+  if_balance_SUM_LT: Float
+  if_balance_LTE: Float
+  if_balance_AVERAGE_LTE: Float
+  if_balance_MIN_LTE: Float
+  if_balance_MAX_LTE: Float
+  if_balance_SUM_LTE: Float
+}
+
+input AddrHoldnftsAggregateInput {
+  count: Int
+  count_LT: Int
+  count_LTE: Int
+  count_GT: Int
+  count_GTE: Int
+  AND: [AddrHoldnftsAggregateInput!]
+  OR: [AddrHoldnftsAggregateInput!]
+  node: AddrHoldnftsNodeAggregationWhereInput
+}
+
+input AddrHoldnftsConnectionSort {
+  node: NFTSort
+}
+
+input AddrHoldnftsConnectionWhere {
+  AND: [AddrHoldnftsConnectionWhere!]
+  OR: [AddrHoldnftsConnectionWhere!]
+  node: NFTWhere
+  node_NOT: NFTWhere
+}
+
+input AddrHoldnftsNodeAggregationWhereInput {
+  AND: [AddrHoldnftsNodeAggregationWhereInput!]
+  OR: [AddrHoldnftsNodeAggregationWhereInput!]
+  contract_EQUAL: String
+  contract_AVERAGE_EQUAL: Float
+  contract_LONGEST_EQUAL: Int
+  contract_SHORTEST_EQUAL: Int
+  contract_GT: Int
+  contract_AVERAGE_GT: Float
+  contract_LONGEST_GT: Int
+  contract_SHORTEST_GT: Int
+  contract_GTE: Int
+  contract_AVERAGE_GTE: Float
+  contract_LONGEST_GTE: Int
+  contract_SHORTEST_GTE: Int
+  contract_LT: Int
+  contract_AVERAGE_LT: Float
+  contract_LONGEST_LT: Int
+  contract_SHORTEST_LT: Int
+  contract_LTE: Int
+  contract_AVERAGE_LTE: Float
+  contract_LONGEST_LTE: Int
+  contract_SHORTEST_LTE: Int
+  imageUrl_EQUAL: String
+  imageUrl_AVERAGE_EQUAL: Float
+  imageUrl_LONGEST_EQUAL: Int
+  imageUrl_SHORTEST_EQUAL: Int
+  imageUrl_GT: Int
+  imageUrl_AVERAGE_GT: Float
+  imageUrl_LONGEST_GT: Int
+  imageUrl_SHORTEST_GT: Int
+  imageUrl_GTE: Int
+  imageUrl_AVERAGE_GTE: Float
+  imageUrl_LONGEST_GTE: Int
+  imageUrl_SHORTEST_GTE: Int
+  imageUrl_LT: Int
+  imageUrl_AVERAGE_LT: Float
+  imageUrl_LONGEST_LT: Int
+  imageUrl_SHORTEST_LT: Int
+  imageUrl_LTE: Int
+  imageUrl_AVERAGE_LTE: Float
+  imageUrl_LONGEST_LTE: Int
+  imageUrl_SHORTEST_LTE: Int
+  symbol_EQUAL: String
+  symbol_AVERAGE_EQUAL: Float
+  symbol_LONGEST_EQUAL: Int
+  symbol_SHORTEST_EQUAL: Int
+  symbol_GT: Int
+  symbol_AVERAGE_GT: Float
+  symbol_LONGEST_GT: Int
+  symbol_SHORTEST_GT: Int
+  symbol_GTE: Int
+  symbol_AVERAGE_GTE: Float
+  symbol_LONGEST_GTE: Int
+  symbol_SHORTEST_GTE: Int
+  symbol_LT: Int
+  symbol_AVERAGE_LT: Float
+  symbol_LONGEST_LT: Int
+  symbol_SHORTEST_LT: Int
+  symbol_LTE: Int
+  symbol_AVERAGE_LTE: Float
+  symbol_LONGEST_LTE: Int
+  symbol_SHORTEST_LTE: Int
+}
+
+input AddrOptions {
+  # Specify one or more AddrSort objects to sort Addrs by. The sorts will be applied in the order in which they are arranged in the array.
+  sort: [AddrSort!]
+  limit: Int
+  offset: Int
+}
+
+# Fields to sort Addrs by. The order in which sorts are applied is not guaranteed when specifying many fields in one AddrSort object.
+input AddrSort {
+  address: SortDirection
+  chainId: SortDirection
+  ens_expiry_date: SortDirection
+  if_balance: SortDirection
+  name: SortDirection
+}
+
+input AddrWhere {
+  OR: [AddrWhere!]
+  AND: [AddrWhere!]
+  address: String
+  address_NOT: String
+  address_IN: [String!]
+  address_NOT_IN: [String!]
+  address_CONTAINS: String
+  address_NOT_CONTAINS: String
+  address_STARTS_WITH: String
+  address_NOT_STARTS_WITH: String
+  address_ENDS_WITH: String
+  address_NOT_ENDS_WITH: String
+  chainId: String
+  chainId_NOT: String
+  chainId_IN: [String]
+  chainId_NOT_IN: [String]
+  chainId_CONTAINS: String
+  chainId_NOT_CONTAINS: String
+  chainId_STARTS_WITH: String
+  chainId_NOT_STARTS_WITH: String
+  chainId_ENDS_WITH: String
+  chainId_NOT_ENDS_WITH: String
+  ens: [String]
+  ens_NOT: [String]
+  ens_INCLUDES: String
+  ens_NOT_INCLUDES: String
+  ens_expiry_date: String
+  ens_expiry_date_NOT: String
+  ens_expiry_date_IN: [String]
+  ens_expiry_date_NOT_IN: [String]
+  ens_expiry_date_CONTAINS: String
+  ens_expiry_date_NOT_CONTAINS: String
+  ens_expiry_date_STARTS_WITH: String
+  ens_expiry_date_NOT_STARTS_WITH: String
+  ens_expiry_date_ENDS_WITH: String
+  ens_expiry_date_NOT_ENDS_WITH: String
+  if_balance: Float
+  if_balance_NOT: Float
+  if_balance_IN: [Float]
+  if_balance_NOT_IN: [Float]
+  if_balance_LT: Float
+  if_balance_LTE: Float
+  if_balance_GT: Float
+  if_balance_GTE: Float
+  name: String
+  name_NOT: String
+  name_IN: [String]
+  name_NOT_IN: [String]
+  name_CONTAINS: String
+  name_NOT_CONTAINS: String
+  name_STARTS_WITH: String
+  name_NOT_STARTS_WITH: String
+  name_ENDS_WITH: String
+  name_NOT_ENDS_WITH: String
+  addrsFollowAggregate: AddrAddrsFollowAggregateInput
+
+  # Return Addrs where all of the related Addrs match this filter
+  addrsFollow_ALL: AddrWhere
+
+  # Return Addrs where none of the related Addrs match this filter
+  addrsFollow_NONE: AddrWhere
+
+  # Return Addrs where one of the related Addrs match this filter
+  addrsFollow_SINGLE: AddrWhere
+
+  # Return Addrs where some of the related Addrs match this filter
+  addrsFollow_SOME: AddrWhere
+  attendEventsAggregate: AddrAttendEventsAggregateInput
+
+  # Return Addrs where all of the related Events match this filter
+  attendEvents_ALL: EventWhere
+
+  # Return Addrs where none of the related Events match this filter
+  attendEvents_NONE: EventWhere
+
+  # Return Addrs where one of the related Events match this filter
+  attendEvents_SINGLE: EventWhere
+
+  # Return Addrs where some of the related Events match this filter
+  attendEvents_SOME: EventWhere
+  featureFeaturesAggregate: AddrFeatureFeaturesAggregateInput
+
+  # Return Addrs where all of the related Features match this filter
+  featureFeatures_ALL: FeatureWhere
+
+  # Return Addrs where none of the related Features match this filter
+  featureFeatures_NONE: FeatureWhere
+
+  # Return Addrs where one of the related Features match this filter
+  featureFeatures_SINGLE: FeatureWhere
+
+  # Return Addrs where some of the related Features match this filter
+  featureFeatures_SOME: FeatureWhere
+  followAddrsAggregate: AddrFollowAddrsAggregateInput
+
+  # Return Addrs where all of the related Addrs match this filter
+  followAddrs_ALL: AddrWhere
+
+  # Return Addrs where none of the related Addrs match this filter
+  followAddrs_NONE: AddrWhere
+
+  # Return Addrs where one of the related Addrs match this filter
+  followAddrs_SINGLE: AddrWhere
+
+  # Return Addrs where some of the related Addrs match this filter
+  followAddrs_SOME: AddrWhere
+  holdnftsAggregate: AddrHoldnftsAggregateInput
+
+  # Return Addrs where all of the related NFTS match this filter
+  holdnfts_ALL: NFTWhere
+
+  # Return Addrs where none of the related NFTS match this filter
+  holdnfts_NONE: NFTWhere
+
+  # Return Addrs where one of the related NFTS match this filter
+  holdnfts_SINGLE: NFTWhere
+
+  # Return Addrs where some of the related NFTS match this filter
+  holdnfts_SOME: NFTWhere
+  addrsFollowConnection_ALL: AddrAddrsFollowConnectionWhere
+  addrsFollowConnection_NONE: AddrAddrsFollowConnectionWhere
+  addrsFollowConnection_SINGLE: AddrAddrsFollowConnectionWhere
+  addrsFollowConnection_SOME: AddrAddrsFollowConnectionWhere
+  attendEventsConnection_ALL: AddrAttendEventsConnectionWhere
+  attendEventsConnection_NONE: AddrAttendEventsConnectionWhere
+  attendEventsConnection_SINGLE: AddrAttendEventsConnectionWhere
+  attendEventsConnection_SOME: AddrAttendEventsConnectionWhere
+  featureFeaturesConnection_ALL: AddrFeatureFeaturesConnectionWhere
+  featureFeaturesConnection_NONE: AddrFeatureFeaturesConnectionWhere
+  featureFeaturesConnection_SINGLE: AddrFeatureFeaturesConnectionWhere
+  featureFeaturesConnection_SOME: AddrFeatureFeaturesConnectionWhere
+  followAddrsConnection_ALL: AddrFollowAddrsConnectionWhere
+  followAddrsConnection_NONE: AddrFollowAddrsConnectionWhere
+  followAddrsConnection_SINGLE: AddrFollowAddrsConnectionWhere
+  followAddrsConnection_SOME: AddrFollowAddrsConnectionWhere
+  holdnftsConnection_ALL: AddrHoldnftsConnectionWhere
+  holdnftsConnection_NONE: AddrHoldnftsConnectionWhere
+  holdnftsConnection_SINGLE: AddrHoldnftsConnectionWhere
+  holdnftsConnection_SOME: AddrHoldnftsConnectionWhere
+}
+
+input EventAddrsAttendAggregateInput {
+  count: Int
+  count_LT: Int
+  count_LTE: Int
+  count_GT: Int
+  count_GTE: Int
+  AND: [EventAddrsAttendAggregateInput!]
+  OR: [EventAddrsAttendAggregateInput!]
+  node: EventAddrsAttendNodeAggregationWhereInput
+}
+
+input EventAddrsAttendConnectionSort {
+  node: AddrSort
+}
+
+input EventAddrsAttendConnectionWhere {
+  AND: [EventAddrsAttendConnectionWhere!]
+  OR: [EventAddrsAttendConnectionWhere!]
+  node: AddrWhere
+  node_NOT: AddrWhere
+}
+
+input EventAddrsAttendNodeAggregationWhereInput {
+  AND: [EventAddrsAttendNodeAggregationWhereInput!]
+  OR: [EventAddrsAttendNodeAggregationWhereInput!]
+  address_EQUAL: String
+  address_AVERAGE_EQUAL: Float
+  address_LONGEST_EQUAL: Int
+  address_SHORTEST_EQUAL: Int
+  address_GT: Int
+  address_AVERAGE_GT: Float
+  address_LONGEST_GT: Int
+  address_SHORTEST_GT: Int
+  address_GTE: Int
+  address_AVERAGE_GTE: Float
+  address_LONGEST_GTE: Int
+  address_SHORTEST_GTE: Int
+  address_LT: Int
+  address_AVERAGE_LT: Float
+  address_LONGEST_LT: Int
+  address_SHORTEST_LT: Int
+  address_LTE: Int
+  address_AVERAGE_LTE: Float
+  address_LONGEST_LTE: Int
+  address_SHORTEST_LTE: Int
+  chainId_EQUAL: String
+  chainId_AVERAGE_EQUAL: Float
+  chainId_LONGEST_EQUAL: Int
+  chainId_SHORTEST_EQUAL: Int
+  chainId_GT: Int
+  chainId_AVERAGE_GT: Float
+  chainId_LONGEST_GT: Int
+  chainId_SHORTEST_GT: Int
+  chainId_GTE: Int
+  chainId_AVERAGE_GTE: Float
+  chainId_LONGEST_GTE: Int
+  chainId_SHORTEST_GTE: Int
+  chainId_LT: Int
+  chainId_AVERAGE_LT: Float
+  chainId_LONGEST_LT: Int
+  chainId_SHORTEST_LT: Int
+  chainId_LTE: Int
+  chainId_AVERAGE_LTE: Float
+  chainId_LONGEST_LTE: Int
+  chainId_SHORTEST_LTE: Int
+  ens_expiry_date_EQUAL: String
+  ens_expiry_date_AVERAGE_EQUAL: Float
+  ens_expiry_date_LONGEST_EQUAL: Int
+  ens_expiry_date_SHORTEST_EQUAL: Int
+  ens_expiry_date_GT: Int
+  ens_expiry_date_AVERAGE_GT: Float
+  ens_expiry_date_LONGEST_GT: Int
+  ens_expiry_date_SHORTEST_GT: Int
+  ens_expiry_date_GTE: Int
+  ens_expiry_date_AVERAGE_GTE: Float
+  ens_expiry_date_LONGEST_GTE: Int
+  ens_expiry_date_SHORTEST_GTE: Int
+  ens_expiry_date_LT: Int
+  ens_expiry_date_AVERAGE_LT: Float
+  ens_expiry_date_LONGEST_LT: Int
+  ens_expiry_date_SHORTEST_LT: Int
+  ens_expiry_date_LTE: Int
+  ens_expiry_date_AVERAGE_LTE: Float
+  ens_expiry_date_LONGEST_LTE: Int
+  ens_expiry_date_SHORTEST_LTE: Int
+  name_EQUAL: String
+  name_AVERAGE_EQUAL: Float
+  name_LONGEST_EQUAL: Int
+  name_SHORTEST_EQUAL: Int
+  name_GT: Int
+  name_AVERAGE_GT: Float
+  name_LONGEST_GT: Int
+  name_SHORTEST_GT: Int
+  name_GTE: Int
+  name_AVERAGE_GTE: Float
+  name_LONGEST_GTE: Int
+  name_SHORTEST_GTE: Int
+  name_LT: Int
+  name_AVERAGE_LT: Float
+  name_LONGEST_LT: Int
+  name_SHORTEST_LT: Int
+  name_LTE: Int
+  name_AVERAGE_LTE: Float
+  name_LONGEST_LTE: Int
+  name_SHORTEST_LTE: Int
+  if_balance_EQUAL: Float
+  if_balance_AVERAGE_EQUAL: Float
+  if_balance_MIN_EQUAL: Float
+  if_balance_MAX_EQUAL: Float
+  if_balance_SUM_EQUAL: Float
+  if_balance_GT: Float
+  if_balance_AVERAGE_GT: Float
+  if_balance_MIN_GT: Float
+  if_balance_MAX_GT: Float
+  if_balance_SUM_GT: Float
+  if_balance_GTE: Float
+  if_balance_AVERAGE_GTE: Float
+  if_balance_MIN_GTE: Float
+  if_balance_MAX_GTE: Float
+  if_balance_SUM_GTE: Float
+  if_balance_LT: Float
+  if_balance_AVERAGE_LT: Float
+  if_balance_MIN_LT: Float
+  if_balance_MAX_LT: Float
+  if_balance_SUM_LT: Float
+  if_balance_LTE: Float
+  if_balance_AVERAGE_LTE: Float
+  if_balance_MIN_LTE: Float
+  if_balance_MAX_LTE: Float
+  if_balance_SUM_LTE: Float
+}
+
+input EventOptions {
+  # Specify one or more EventSort objects to sort Events by. The sorts will be applied in the order in which they are arranged in the array.
+  sort: [EventSort!]
+  limit: Int
+  offset: Int
+}
+
+# Fields to sort Events by. The order in which sorts are applied is not guaranteed when specifying many fields in one EventSort object.
+input EventSort {
+  id: SortDirection
+  imageUrl: SortDirection
+  name: SortDirection
+}
+
+input EventWhere {
+  OR: [EventWhere!]
+  AND: [EventWhere!]
+  id: String
+  id_NOT: String
+  id_IN: [String!]
+  id_NOT_IN: [String!]
+  id_CONTAINS: String
+  id_NOT_CONTAINS: String
+  id_STARTS_WITH: String
+  id_NOT_STARTS_WITH: String
+  id_ENDS_WITH: String
+  id_NOT_ENDS_WITH: String
+  imageUrl: String
+  imageUrl_NOT: String
+  imageUrl_IN: [String]
+  imageUrl_NOT_IN: [String]
+  imageUrl_CONTAINS: String
+  imageUrl_NOT_CONTAINS: String
+  imageUrl_STARTS_WITH: String
+  imageUrl_NOT_STARTS_WITH: String
+  imageUrl_ENDS_WITH: String
+  imageUrl_NOT_ENDS_WITH: String
+  name: String
+  name_NOT: String
+  name_IN: [String!]
+  name_NOT_IN: [String!]
+  name_CONTAINS: String
+  name_NOT_CONTAINS: String
+  name_STARTS_WITH: String
+  name_NOT_STARTS_WITH: String
+  name_ENDS_WITH: String
+  name_NOT_ENDS_WITH: String
+  addrsAttendAggregate: EventAddrsAttendAggregateInput
+
+  # Return Events where all of the related Addrs match this filter
+  addrsAttend_ALL: AddrWhere
+
+  # Return Events where none of the related Addrs match this filter
+  addrsAttend_NONE: AddrWhere
+
+  # Return Events where one of the related Addrs match this filter
+  addrsAttend_SINGLE: AddrWhere
+
+  # Return Events where some of the related Addrs match this filter
+  addrsAttend_SOME: AddrWhere
+  addrsAttendConnection_ALL: EventAddrsAttendConnectionWhere
+  addrsAttendConnection_NONE: EventAddrsAttendConnectionWhere
+  addrsAttendConnection_SINGLE: EventAddrsAttendConnectionWhere
+  addrsAttendConnection_SOME: EventAddrsAttendConnectionWhere
+}
+
+input FeatureAddrsFeatureAggregateInput {
+  count: Int
+  count_LT: Int
+  count_LTE: Int
+  count_GT: Int
+  count_GTE: Int
+  AND: [FeatureAddrsFeatureAggregateInput!]
+  OR: [FeatureAddrsFeatureAggregateInput!]
+  node: FeatureAddrsFeatureNodeAggregationWhereInput
+  edge: FeatureAddrsFeatureEdgeAggregationWhereInput
+}
+
+input FeatureAddrsFeatureConnectionSort {
+  edge: FeaturePropertiesSort
+  node: AddrSort
+}
+
+input FeatureAddrsFeatureConnectionWhere {
+  AND: [FeatureAddrsFeatureConnectionWhere!]
+  OR: [FeatureAddrsFeatureConnectionWhere!]
+  edge: FeaturePropertiesWhere
+  edge_NOT: FeaturePropertiesWhere
+  node: AddrWhere
+  node_NOT: AddrWhere
+}
+
+input FeatureAddrsFeatureEdgeAggregationWhereInput {
+  AND: [FeatureAddrsFeatureEdgeAggregationWhereInput!]
+  OR: [FeatureAddrsFeatureEdgeAggregationWhereInput!]
+  contract_EQUAL: String
+  contract_AVERAGE_EQUAL: Float
+  contract_LONGEST_EQUAL: Int
+  contract_SHORTEST_EQUAL: Int
+  contract_GT: Int
+  contract_AVERAGE_GT: Float
+  contract_LONGEST_GT: Int
+  contract_SHORTEST_GT: Int
+  contract_GTE: Int
+  contract_AVERAGE_GTE: Float
+  contract_LONGEST_GTE: Int
+  contract_SHORTEST_GTE: Int
+  contract_LT: Int
+  contract_AVERAGE_LT: Float
+  contract_LONGEST_LT: Int
+  contract_SHORTEST_LT: Int
+  contract_LTE: Int
+  contract_AVERAGE_LTE: Float
+  contract_LONGEST_LTE: Int
+  contract_SHORTEST_LTE: Int
+  status_EQUAL: BigInt
+  status_AVERAGE_EQUAL: BigInt
+  status_MIN_EQUAL: BigInt
+  status_MAX_EQUAL: BigInt
+  status_SUM_EQUAL: BigInt
+  status_GT: BigInt
+  status_AVERAGE_GT: BigInt
+  status_MIN_GT: BigInt
+  status_MAX_GT: BigInt
+  status_SUM_GT: BigInt
+  status_GTE: BigInt
+  status_AVERAGE_GTE: BigInt
+  status_MIN_GTE: BigInt
+  status_MAX_GTE: BigInt
+  status_SUM_GTE: BigInt
+  status_LT: BigInt
+  status_AVERAGE_LT: BigInt
+  status_MIN_LT: BigInt
+  status_MAX_LT: BigInt
+  status_SUM_LT: BigInt
+  status_LTE: BigInt
+  status_AVERAGE_LTE: BigInt
+  status_MIN_LTE: BigInt
+  status_MAX_LTE: BigInt
+  status_SUM_LTE: BigInt
+  task1_EQUAL: BigInt
+  task1_AVERAGE_EQUAL: BigInt
+  task1_MIN_EQUAL: BigInt
+  task1_MAX_EQUAL: BigInt
+  task1_SUM_EQUAL: BigInt
+  task1_GT: BigInt
+  task1_AVERAGE_GT: BigInt
+  task1_MIN_GT: BigInt
+  task1_MAX_GT: BigInt
+  task1_SUM_GT: BigInt
+  task1_GTE: BigInt
+  task1_AVERAGE_GTE: BigInt
+  task1_MIN_GTE: BigInt
+  task1_MAX_GTE: BigInt
+  task1_SUM_GTE: BigInt
+  task1_LT: BigInt
+  task1_AVERAGE_LT: BigInt
+  task1_MIN_LT: BigInt
+  task1_MAX_LT: BigInt
+  task1_SUM_LT: BigInt
+  task1_LTE: BigInt
+  task1_AVERAGE_LTE: BigInt
+  task1_MIN_LTE: BigInt
+  task1_MAX_LTE: BigInt
+  task1_SUM_LTE: BigInt
+  task2_EQUAL: BigInt
+  task2_AVERAGE_EQUAL: BigInt
+  task2_MIN_EQUAL: BigInt
+  task2_MAX_EQUAL: BigInt
+  task2_SUM_EQUAL: BigInt
+  task2_GT: BigInt
+  task2_AVERAGE_GT: BigInt
+  task2_MIN_GT: BigInt
+  task2_MAX_GT: BigInt
+  task2_SUM_GT: BigInt
+  task2_GTE: BigInt
+  task2_AVERAGE_GTE: BigInt
+  task2_MIN_GTE: BigInt
+  task2_MAX_GTE: BigInt
+  task2_SUM_GTE: BigInt
+  task2_LT: BigInt
+  task2_AVERAGE_LT: BigInt
+  task2_MIN_LT: BigInt
+  task2_MAX_LT: BigInt
+  task2_SUM_LT: BigInt
+  task2_LTE: BigInt
+  task2_AVERAGE_LTE: BigInt
+  task2_MIN_LTE: BigInt
+  task2_MAX_LTE: BigInt
+  task2_SUM_LTE: BigInt
+  task3_EQUAL: BigInt
+  task3_AVERAGE_EQUAL: BigInt
+  task3_MIN_EQUAL: BigInt
+  task3_MAX_EQUAL: BigInt
+  task3_SUM_EQUAL: BigInt
+  task3_GT: BigInt
+  task3_AVERAGE_GT: BigInt
+  task3_MIN_GT: BigInt
+  task3_MAX_GT: BigInt
+  task3_SUM_GT: BigInt
+  task3_GTE: BigInt
+  task3_AVERAGE_GTE: BigInt
+  task3_MIN_GTE: BigInt
+  task3_MAX_GTE: BigInt
+  task3_SUM_GTE: BigInt
+  task3_LT: BigInt
+  task3_AVERAGE_LT: BigInt
+  task3_MIN_LT: BigInt
+  task3_MAX_LT: BigInt
+  task3_SUM_LT: BigInt
+  task3_LTE: BigInt
+  task3_AVERAGE_LTE: BigInt
+  task3_MIN_LTE: BigInt
+  task3_MAX_LTE: BigInt
+  task3_SUM_LTE: BigInt
+}
+
+input FeatureAddrsFeatureNodeAggregationWhereInput {
+  AND: [FeatureAddrsFeatureNodeAggregationWhereInput!]
+  OR: [FeatureAddrsFeatureNodeAggregationWhereInput!]
+  address_EQUAL: String
+  address_AVERAGE_EQUAL: Float
+  address_LONGEST_EQUAL: Int
+  address_SHORTEST_EQUAL: Int
+  address_GT: Int
+  address_AVERAGE_GT: Float
+  address_LONGEST_GT: Int
+  address_SHORTEST_GT: Int
+  address_GTE: Int
+  address_AVERAGE_GTE: Float
+  address_LONGEST_GTE: Int
+  address_SHORTEST_GTE: Int
+  address_LT: Int
+  address_AVERAGE_LT: Float
+  address_LONGEST_LT: Int
+  address_SHORTEST_LT: Int
+  address_LTE: Int
+  address_AVERAGE_LTE: Float
+  address_LONGEST_LTE: Int
+  address_SHORTEST_LTE: Int
+  chainId_EQUAL: String
+  chainId_AVERAGE_EQUAL: Float
+  chainId_LONGEST_EQUAL: Int
+  chainId_SHORTEST_EQUAL: Int
+  chainId_GT: Int
+  chainId_AVERAGE_GT: Float
+  chainId_LONGEST_GT: Int
+  chainId_SHORTEST_GT: Int
+  chainId_GTE: Int
+  chainId_AVERAGE_GTE: Float
+  chainId_LONGEST_GTE: Int
+  chainId_SHORTEST_GTE: Int
+  chainId_LT: Int
+  chainId_AVERAGE_LT: Float
+  chainId_LONGEST_LT: Int
+  chainId_SHORTEST_LT: Int
+  chainId_LTE: Int
+  chainId_AVERAGE_LTE: Float
+  chainId_LONGEST_LTE: Int
+  chainId_SHORTEST_LTE: Int
+  ens_expiry_date_EQUAL: String
+  ens_expiry_date_AVERAGE_EQUAL: Float
+  ens_expiry_date_LONGEST_EQUAL: Int
+  ens_expiry_date_SHORTEST_EQUAL: Int
+  ens_expiry_date_GT: Int
+  ens_expiry_date_AVERAGE_GT: Float
+  ens_expiry_date_LONGEST_GT: Int
+  ens_expiry_date_SHORTEST_GT: Int
+  ens_expiry_date_GTE: Int
+  ens_expiry_date_AVERAGE_GTE: Float
+  ens_expiry_date_LONGEST_GTE: Int
+  ens_expiry_date_SHORTEST_GTE: Int
+  ens_expiry_date_LT: Int
+  ens_expiry_date_AVERAGE_LT: Float
+  ens_expiry_date_LONGEST_LT: Int
+  ens_expiry_date_SHORTEST_LT: Int
+  ens_expiry_date_LTE: Int
+  ens_expiry_date_AVERAGE_LTE: Float
+  ens_expiry_date_LONGEST_LTE: Int
+  ens_expiry_date_SHORTEST_LTE: Int
+  name_EQUAL: String
+  name_AVERAGE_EQUAL: Float
+  name_LONGEST_EQUAL: Int
+  name_SHORTEST_EQUAL: Int
+  name_GT: Int
+  name_AVERAGE_GT: Float
+  name_LONGEST_GT: Int
+  name_SHORTEST_GT: Int
+  name_GTE: Int
+  name_AVERAGE_GTE: Float
+  name_LONGEST_GTE: Int
+  name_SHORTEST_GTE: Int
+  name_LT: Int
+  name_AVERAGE_LT: Float
+  name_LONGEST_LT: Int
+  name_SHORTEST_LT: Int
+  name_LTE: Int
+  name_AVERAGE_LTE: Float
+  name_LONGEST_LTE: Int
+  name_SHORTEST_LTE: Int
+  if_balance_EQUAL: Float
+  if_balance_AVERAGE_EQUAL: Float
+  if_balance_MIN_EQUAL: Float
+  if_balance_MAX_EQUAL: Float
+  if_balance_SUM_EQUAL: Float
+  if_balance_GT: Float
+  if_balance_AVERAGE_GT: Float
+  if_balance_MIN_GT: Float
+  if_balance_MAX_GT: Float
+  if_balance_SUM_GT: Float
+  if_balance_GTE: Float
+  if_balance_AVERAGE_GTE: Float
+  if_balance_MIN_GTE: Float
+  if_balance_MAX_GTE: Float
+  if_balance_SUM_GTE: Float
+  if_balance_LT: Float
+  if_balance_AVERAGE_LT: Float
+  if_balance_MIN_LT: Float
+  if_balance_MAX_LT: Float
+  if_balance_SUM_LT: Float
+  if_balance_LTE: Float
+  if_balance_AVERAGE_LTE: Float
+  if_balance_MIN_LTE: Float
+  if_balance_MAX_LTE: Float
+  if_balance_SUM_LTE: Float
+}
+
+input FeatureOptions {
+  # Specify one or more FeatureSort objects to sort Features by. The sorts will be applied in the order in which they are arranged in the array.
+  sort: [FeatureSort!]
+  limit: Int
+  offset: Int
+}
+
+input FeaturePropertiesSort {
+  contract: SortDirection
+  status: SortDirection
+  task1: SortDirection
+  task2: SortDirection
+  task3: SortDirection
+}
+
+input FeaturePropertiesWhere {
+  OR: [FeaturePropertiesWhere!]
+  AND: [FeaturePropertiesWhere!]
+  contract: String
+  contract_NOT: String
+  contract_IN: [String]
+  contract_NOT_IN: [String]
+  contract_CONTAINS: String
+  contract_NOT_CONTAINS: String
+  contract_STARTS_WITH: String
+  contract_NOT_STARTS_WITH: String
+  contract_ENDS_WITH: String
+  contract_NOT_ENDS_WITH: String
+  status: BigInt
+  status_NOT: BigInt
+  status_IN: [BigInt]
+  status_NOT_IN: [BigInt]
+  status_LT: BigInt
+  status_LTE: BigInt
+  status_GT: BigInt
+  status_GTE: BigInt
+  task1: BigInt
+  task1_NOT: BigInt
+  task1_IN: [BigInt]
+  task1_NOT_IN: [BigInt]
+  task1_LT: BigInt
+  task1_LTE: BigInt
+  task1_GT: BigInt
+  task1_GTE: BigInt
+  task2: BigInt
+  task2_NOT: BigInt
+  task2_IN: [BigInt]
+  task2_NOT_IN: [BigInt]
+  task2_LT: BigInt
+  task2_LTE: BigInt
+  task2_GT: BigInt
+  task2_GTE: BigInt
+  task3: BigInt
+  task3_NOT: BigInt
+  task3_IN: [BigInt]
+  task3_NOT_IN: [BigInt]
+  task3_LT: BigInt
+  task3_LTE: BigInt
+  task3_GT: BigInt
+  task3_GTE: BigInt
+}
+
+# Fields to sort Features by. The order in which sorts are applied is not guaranteed when specifying many fields in one FeatureSort object.
+input FeatureSort {
+  feature: SortDirection
+  projectName: SortDirection
+}
+
+input FeatureWhere {
+  OR: [FeatureWhere!]
+  AND: [FeatureWhere!]
+  feature: String
+  feature_NOT: String
+  feature_IN: [String!]
+  feature_NOT_IN: [String!]
+  feature_CONTAINS: String
+  feature_NOT_CONTAINS: String
+  feature_STARTS_WITH: String
+  feature_NOT_STARTS_WITH: String
+  feature_ENDS_WITH: String
+  feature_NOT_ENDS_WITH: String
+  projectName: String
+  projectName_NOT: String
+  projectName_IN: [String]
+  projectName_NOT_IN: [String]
+  projectName_CONTAINS: String
+  projectName_NOT_CONTAINS: String
+  projectName_STARTS_WITH: String
+  projectName_NOT_STARTS_WITH: String
+  projectName_ENDS_WITH: String
+  projectName_NOT_ENDS_WITH: String
+  addrsFeatureAggregate: FeatureAddrsFeatureAggregateInput
+
+  # Return Features where all of the related Addrs match this filter
+  addrsFeature_ALL: AddrWhere
+
+  # Return Features where none of the related Addrs match this filter
+  addrsFeature_NONE: AddrWhere
+
+  # Return Features where one of the related Addrs match this filter
+  addrsFeature_SINGLE: AddrWhere
+
+  # Return Features where some of the related Addrs match this filter
+  addrsFeature_SOME: AddrWhere
+  addrsFeatureConnection_ALL: FeatureAddrsFeatureConnectionWhere
+  addrsFeatureConnection_NONE: FeatureAddrsFeatureConnectionWhere
+  addrsFeatureConnection_SINGLE: FeatureAddrsFeatureConnectionWhere
+  addrsFeatureConnection_SOME: FeatureAddrsFeatureConnectionWhere
+}
+
+input NFTAddrsHoldAggregateInput {
+  count: Int
+  count_LT: Int
+  count_LTE: Int
+  count_GT: Int
+  count_GTE: Int
+  AND: [NFTAddrsHoldAggregateInput!]
+  OR: [NFTAddrsHoldAggregateInput!]
+  node: NFTAddrsHoldNodeAggregationWhereInput
+}
+
+input NFTAddrsHoldConnectionSort {
+  node: AddrSort
+}
+
+input NFTAddrsHoldConnectionWhere {
+  AND: [NFTAddrsHoldConnectionWhere!]
+  OR: [NFTAddrsHoldConnectionWhere!]
+  node: AddrWhere
+  node_NOT: AddrWhere
+}
+
+input NFTAddrsHoldNodeAggregationWhereInput {
+  AND: [NFTAddrsHoldNodeAggregationWhereInput!]
+  OR: [NFTAddrsHoldNodeAggregationWhereInput!]
+  address_EQUAL: String
+  address_AVERAGE_EQUAL: Float
+  address_LONGEST_EQUAL: Int
+  address_SHORTEST_EQUAL: Int
+  address_GT: Int
+  address_AVERAGE_GT: Float
+  address_LONGEST_GT: Int
+  address_SHORTEST_GT: Int
+  address_GTE: Int
+  address_AVERAGE_GTE: Float
+  address_LONGEST_GTE: Int
+  address_SHORTEST_GTE: Int
+  address_LT: Int
+  address_AVERAGE_LT: Float
+  address_LONGEST_LT: Int
+  address_SHORTEST_LT: Int
+  address_LTE: Int
+  address_AVERAGE_LTE: Float
+  address_LONGEST_LTE: Int
+  address_SHORTEST_LTE: Int
+  chainId_EQUAL: String
+  chainId_AVERAGE_EQUAL: Float
+  chainId_LONGEST_EQUAL: Int
+  chainId_SHORTEST_EQUAL: Int
+  chainId_GT: Int
+  chainId_AVERAGE_GT: Float
+  chainId_LONGEST_GT: Int
+  chainId_SHORTEST_GT: Int
+  chainId_GTE: Int
+  chainId_AVERAGE_GTE: Float
+  chainId_LONGEST_GTE: Int
+  chainId_SHORTEST_GTE: Int
+  chainId_LT: Int
+  chainId_AVERAGE_LT: Float
+  chainId_LONGEST_LT: Int
+  chainId_SHORTEST_LT: Int
+  chainId_LTE: Int
+  chainId_AVERAGE_LTE: Float
+  chainId_LONGEST_LTE: Int
+  chainId_SHORTEST_LTE: Int
+  ens_expiry_date_EQUAL: String
+  ens_expiry_date_AVERAGE_EQUAL: Float
+  ens_expiry_date_LONGEST_EQUAL: Int
+  ens_expiry_date_SHORTEST_EQUAL: Int
+  ens_expiry_date_GT: Int
+  ens_expiry_date_AVERAGE_GT: Float
+  ens_expiry_date_LONGEST_GT: Int
+  ens_expiry_date_SHORTEST_GT: Int
+  ens_expiry_date_GTE: Int
+  ens_expiry_date_AVERAGE_GTE: Float
+  ens_expiry_date_LONGEST_GTE: Int
+  ens_expiry_date_SHORTEST_GTE: Int
+  ens_expiry_date_LT: Int
+  ens_expiry_date_AVERAGE_LT: Float
+  ens_expiry_date_LONGEST_LT: Int
+  ens_expiry_date_SHORTEST_LT: Int
+  ens_expiry_date_LTE: Int
+  ens_expiry_date_AVERAGE_LTE: Float
+  ens_expiry_date_LONGEST_LTE: Int
+  ens_expiry_date_SHORTEST_LTE: Int
+  name_EQUAL: String
+  name_AVERAGE_EQUAL: Float
+  name_LONGEST_EQUAL: Int
+  name_SHORTEST_EQUAL: Int
+  name_GT: Int
+  name_AVERAGE_GT: Float
+  name_LONGEST_GT: Int
+  name_SHORTEST_GT: Int
+  name_GTE: Int
+  name_AVERAGE_GTE: Float
+  name_LONGEST_GTE: Int
+  name_SHORTEST_GTE: Int
+  name_LT: Int
+  name_AVERAGE_LT: Float
+  name_LONGEST_LT: Int
+  name_SHORTEST_LT: Int
+  name_LTE: Int
+  name_AVERAGE_LTE: Float
+  name_LONGEST_LTE: Int
+  name_SHORTEST_LTE: Int
+  if_balance_EQUAL: Float
+  if_balance_AVERAGE_EQUAL: Float
+  if_balance_MIN_EQUAL: Float
+  if_balance_MAX_EQUAL: Float
+  if_balance_SUM_EQUAL: Float
+  if_balance_GT: Float
+  if_balance_AVERAGE_GT: Float
+  if_balance_MIN_GT: Float
+  if_balance_MAX_GT: Float
+  if_balance_SUM_GT: Float
+  if_balance_GTE: Float
+  if_balance_AVERAGE_GTE: Float
+  if_balance_MIN_GTE: Float
+  if_balance_MAX_GTE: Float
+  if_balance_SUM_GTE: Float
+  if_balance_LT: Float
+  if_balance_AVERAGE_LT: Float
+  if_balance_MIN_LT: Float
+  if_balance_MAX_LT: Float
+  if_balance_SUM_LT: Float
+  if_balance_LTE: Float
+  if_balance_AVERAGE_LTE: Float
+  if_balance_MIN_LTE: Float
+  if_balance_MAX_LTE: Float
+  if_balance_SUM_LTE: Float
+}
+
+input NFTOptions {
+  # Specify one or more NFTSort objects to sort Nfts by. The sorts will be applied in the order in which they are arranged in the array.
+  sort: [NFTSort!]
+  limit: Int
+  offset: Int
+}
+
+# Fields to sort Nfts by. The order in which sorts are applied is not guaranteed when specifying many fields in one NFTSort object.
+input NFTSort {
+  contract: SortDirection
+  imageUrl: SortDirection
+  symbol: SortDirection
+}
+
+input NFTWhere {
+  OR: [NFTWhere!]
+  AND: [NFTWhere!]
+  contract: String
+  contract_NOT: String
+  contract_IN: [String!]
+  contract_NOT_IN: [String!]
+  contract_CONTAINS: String
+  contract_NOT_CONTAINS: String
+  contract_STARTS_WITH: String
+  contract_NOT_STARTS_WITH: String
+  contract_ENDS_WITH: String
+  contract_NOT_ENDS_WITH: String
+  imageUrl: String
+  imageUrl_NOT: String
+  imageUrl_IN: [String]
+  imageUrl_NOT_IN: [String]
+  imageUrl_CONTAINS: String
+  imageUrl_NOT_CONTAINS: String
+  imageUrl_STARTS_WITH: String
+  imageUrl_NOT_STARTS_WITH: String
+  imageUrl_ENDS_WITH: String
+  imageUrl_NOT_ENDS_WITH: String
+  symbol: String
+  symbol_NOT: String
+  symbol_IN: [String!]
+  symbol_NOT_IN: [String!]
+  symbol_CONTAINS: String
+  symbol_NOT_CONTAINS: String
+  symbol_STARTS_WITH: String
+  symbol_NOT_STARTS_WITH: String
+  symbol_ENDS_WITH: String
+  symbol_NOT_ENDS_WITH: String
+  addrsHoldAggregate: NFTAddrsHoldAggregateInput
+
+  # Return NFTS where all of the related Addrs match this filter
+  addrsHold_ALL: AddrWhere
+
+  # Return NFTS where none of the related Addrs match this filter
+  addrsHold_NONE: AddrWhere
+
+  # Return NFTS where one of the related Addrs match this filter
+  addrsHold_SINGLE: AddrWhere
+
+  # Return NFTS where some of the related Addrs match this filter
+  addrsHold_SOME: AddrWhere
+  addrsHoldConnection_ALL: NFTAddrsHoldConnectionWhere
+  addrsHoldConnection_NONE: NFTAddrsHoldConnectionWhere
+  addrsHoldConnection_SINGLE: NFTAddrsHoldConnectionWhere
+  addrsHoldConnection_SOME: NFTAddrsHoldConnectionWhere
+}

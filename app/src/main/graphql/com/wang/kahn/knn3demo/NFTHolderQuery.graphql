@@ -1,0 +1,11 @@
+query NFTHolderQuery($nftSymbol: String){
+  nfts(where:{symbol: $nftSymbol}) {
+    contract
+    symbol
+    addrsHold {
+      address
+      ens
+      name
+    }
+  }
+}

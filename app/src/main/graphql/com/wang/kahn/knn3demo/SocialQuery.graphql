@@ -1,0 +1,10 @@
+query SocialQuery($addressVar: String){
+  addrs(where: { address: $addressVar }) {
+    address
+    addrsFollow {
+      address
+      ens
+      name
+    }
+  }
+}
